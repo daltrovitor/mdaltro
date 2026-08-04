@@ -1,0 +1,16 @@
+{
+  "name": "Dr. Marcelo Daltro - Dentista",
+  "short_name": "Marcelo Daltro",
+  "description": "Recuperando autoestimas; Redesenhando sorrisos — Consultório odontológico do Dr. Marcelo Daltro.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/logo.ico",
+      "sizes": "512x512",
+      "type": "image/x-icon"
+    }
+  ]
+}
