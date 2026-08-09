@@ -4,11 +4,14 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Testimonial from "@/app/components2/testimonial";
 import Videosec from "./components2/videosec";
+import GoldCtaButton from "@/app/components2/goldbutton";
+import FormModal from "@/app/components2/formmodal";
 import { Instagram, Linkedin, Facebook, Phone, MapPin, Mail, ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function HomePage() {
   const [isClient, setIsClient] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
@@ -92,7 +95,6 @@ export default function HomePage() {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="container relative z-10 mx-auto px-4 text-center text-white flex flex-col items-center justify-center pt-20 h-full"
         >
-          <div className="relative inline-block flex items-center justify-center"></div>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -124,7 +126,7 @@ export default function HomePage() {
       </div>
 
       {/* Video Section */}
-      <Videosec />
+      <Videosec onOpenModal={() => setIsModalOpen(true)} />
 
       {/* Futuristic Separator Line */}
       <div className="relative w-full z-20 flex justify-center py-4 bg-[#050505]">
@@ -204,22 +206,9 @@ export default function HomePage() {
                       <p className="text-white/60 text-lg md:text-xl font-lora mb-10 leading-relaxed font-light mt-4">
                         {service.description}
                       </p>
-                      <motion.div 
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="cursor-pointer w-[280px]"
-                      >
-                        <a href={service.url} target="_blank" className="block relative group/btn">
-                          <div className="absolute inset-0 bg-primary opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-500 rounded-full"></div>
-                          <Image
-                            width={457}
-                            height={111}
-                            alt="Agendar Consulta"
-                            src="/agendar.png"
-                            className="w-full relative z-10 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
-                          />
-                        </a>
-                      </motion.div>
+                      <div className="mt-2">
+                        <GoldCtaButton onClick={() => setIsModalOpen(true)} text="Quero entender meu caso" />
+                      </div>
                     </div>
 
                   </div>
@@ -394,6 +383,9 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Multi-Step Form Modal */}
+      <FormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

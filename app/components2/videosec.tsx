@@ -1,8 +1,12 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import GoldCtaButton from "./goldbutton";
 
-export default function Videosec() {
+interface VideosecProps {
+  onOpenModal?: () => void;
+}
+
+export default function Videosec({ onOpenModal }: VideosecProps) {
   return (
     <section id="video" className="py-32 bg-transparent relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -15,7 +19,7 @@ export default function Videosec() {
         >
           <span className="text-xs font-mont tracking-[0.4em] text-primary/60 uppercase mb-4 block">Transformação</span>
           <h2 className="text-4xl md:text-6xl font-fair text-primary tracking-tight bg-clip-text bg-gradient-to-b from-primary to-primary/50 text-transparent drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
-            A Magia do Sorriso
+            Antes de decidir o tratamento precisamos entender o seu sorriso
           </h2>
           <div className="w-px h-12 bg-gradient-to-b from-primary/50 to-transparent mx-auto mt-6"></div>
         </motion.div>
@@ -55,22 +59,7 @@ export default function Videosec() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex justify-center relative z-20 mt-20"
         >
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="cursor-pointer group/btn"
-          >
-            <a href="https://wa.me/5562991873755" target="_blank" className="block relative">
-              <div className="absolute inset-0 bg-primary opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-500 rounded-full"></div>
-              <Image 
-                width={457} 
-                height={111} 
-                alt="Agendar Consulta" 
-                src="/agendar.png" 
-                className="w-[200px] sm:w-[260px] md:w-[320px] relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]" 
-              />
-            </a>
-          </motion.div>
+          <GoldCtaButton onClick={onOpenModal} text="Quero entender meu caso" />
         </motion.div>
       </div>
     </section>
