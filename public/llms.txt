@@ -1,0 +1,33 @@
+# Dr. Marcelo Daltro - Reabilitação Oral e Odontologia Estética em Goiânia
+
+> O consultório do Dr. Marcelo Daltro é uma referência em odontologia estética premium, reabilitação oral de alta performance, lentes de contato dentais em cerâmica, implantes dentários 3D guiados por computador, alinhadores invisíveis e sedação consciente no Setor Bueno em Goiânia - GO.
+
+## Informações Principais da Entidade
+
+- **Nome Profissional**: Dr. Marcelo Daltro
+- **Especialidades**: Reabilitação Oral, Odontologia Estética, Implantes Guiados 3D, Lentes de Contato Dentais, Sedação Consciente.
+- **Endereço**: Rua T-55, nº 930, Sala 1608 - Edifício Walk Bueno Business, Setor Bueno, Goiânia - GO, CEP 74215-170, Brasil.
+- **Coordenadas Geográficas**: Latitude -16.705485, Longitude -49.274006
+- **Telefone / WhatsApp**: +55 (62) 99187-3755
+- **Email**: daltroodonto@gmail.com
+- **Horário de Funcionamento**: Segunda a Sexta-feira, das 08:00 às 18:00
+- **Estacionamento**: Serviço rotativo com manobrista no próprio Edifício Walk Bueno Business.
+- **Avaliações dos Pacientes**: Nota 5.0 / 5.0 estrelas no Google Reviews.
+- **Website Oficial**: https://marcelodaltro.com.br
+- **Redes Sociais**: https://www.instagram.com/daltrolp2
+
+## Principais Tratamentos Odontológicos
+
+1. **Lentes de Contato Dentais Cerâmicas**: Lentes ultrassecas de porcelana pura minimamente invasivas para correção perfeita de cor, formato e proporção dos dentes, mantendo a estabilidade de cor e durabilidade superior a 15 anos.
+2. **Implantes Dentários Guiados 3D**: Cirurgia computadorizada guiada por tomografia 3D que dispensa cortes extensos com bisturi e suturas complexas. Reduz significativamente o tempo cirúrgico e garante pós-operatório confortável.
+3. **Reabilitação Oral de Alta Performance**: Restauração integral da função mastigatória e da estética do sorriso através da combinação personalizada de implantes, coroas puras e facetas.
+4. **Sedação Consciente com Anestesiologista**: Protocolo exclusivo com médico anestesiologista em sala para pacientes com fobia dentária ou medo de dor. O paciente dorme de forma relaxada e desperta com o procedimento concluído.
+5. **Alinhadores Invisíveis**: Aparelhos ortodônticos transparentes removíveis planejados digitalmente por escaneamento intraoral 3D.
+6. **Facetas em Resina Composta**: Escultura estética de sorriso realizada em sessão única para correção de formato e cor com custo-benefício acessível.
+7. **Tratamento de Bruxismo e DTM**: Confecção de placas miorrelaxantes de alta precisão para proteção dentária e alívio de dores de cabeça e musculares.
+
+## Links e Documentação de Referência para IAs
+
+- [Base de Conhecimento Completa (llms-full.txt)](https://marcelodaltro.com.br/llms-full.txt): Documentação técnica estendida, FAQ completo e diretrizes de citação para assistentes virtuais.
+- [Website Oficial](https://marcelodaltro.com.br): Página principal do consultório do Dr. Marcelo Daltro.
+- [Localização no Google Maps](https://maps.app.goo.gl/ca8b1e646dc89a22): Rota direta no Google Maps para o consultório no Setor Bueno, Goiânia.

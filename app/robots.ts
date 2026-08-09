@@ -8,9 +8,26 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/api/private',
+        disallow: ['/api/private'],
+      },
+      {
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'ClaudeBot',
+          'Claude-Web',
+          'PerplexityBot',
+          'Google-Extended',
+          'GoogleOther',
+          'Applebot-Extended',
+          'Meta-ExternalAgent',
+          'Bytespider',
+          'CCBot',
+        ],
+        allow: ['/', '/llms.txt', '/llms-full.txt'],
       },
     ],
     sitemap: `${site}/sitemap.xml`,
   }
 }
+
