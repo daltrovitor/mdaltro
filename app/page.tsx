@@ -97,21 +97,6 @@ export default function HomePage() {
         >
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-        >
-          <span className="text-secondary-foreground/50 text-xs tracking-[0.3em] uppercase font-mont">Descubra</span>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="w-6 h-6 text-primary/70" />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Futuristic Separator Line */}
@@ -138,6 +123,9 @@ export default function HomePage() {
             className="h-[1px] w-3/4 bg-gradient-to-r from-transparent via-primary/50 to-transparent"
          />
       </div>
+      {/*Depoimentos Section */}
+
+      <Testimonial />
 
       {/* Services Section */}
       <section className="relative bg-transparent py-32 z-10">
@@ -231,7 +219,7 @@ export default function HomePage() {
          />
       </div>
       
-      <Testimonial />
+      
 
       <section className="bg-transparent py-32 relative z-10">
         <motion.div 
