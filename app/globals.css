@@ -3,6 +3,7 @@
 @import "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap";
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "lenis/dist/lenis.css";
 
 @theme{
 --font-fair:"Playfair Display", serif;

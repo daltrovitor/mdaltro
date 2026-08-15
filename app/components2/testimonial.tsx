@@ -1,201 +1,185 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Play, ChevronLeft, ChevronRight } from "lucide-react"
-import { motion } from "framer-motion"
-import TextTestimonials from "./texttestimonial"
+import { useState } from "react";
+import { Play, Sparkles, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface Testimonial {
-  id: string
-  name: string
-  youtubeUrl: string
+interface StrategicTestimonial {
+  id: string;
+  role: string;
+  roleDescription: string;
+  name: string;
+  treatment: string;
+  youtubeUrl: string;
+  quote: string;
 }
 
-const testimonials: Testimonial[] = [
-  { id: "1", name: "Priscilla Ramos", youtubeUrl: "https://youtu.be/FMtOkxWcNMk?si=mFYuTX-7OqasY2H8" },
-  { id: "2", name: "Paulo Lima", youtubeUrl: "https://youtu.be/6D1g1-mNwM0?si=2jhTcYrNrIddz93w" },
-  { id: "3", name: "Nelcina Martins", youtubeUrl: "https://youtu.be/p8SCJUWKMow?si=FdrinNSYyUTksdb_" },
-  { id: "4", name: "Eugênio de Carvalho", youtubeUrl: "https://youtu.be/Nq_Wcn6ipMk" },
-  { id: "5", name: "Sávia Barros Diniz", youtubeUrl: "https://youtu.be/bfd4QyYptZI?si=jTs8iOiI94WjSReP" },
-  { id: "6", name: "Ana Maria Veiga Jardim", youtubeUrl: "https://youtu.be/jM-i98OAXhk?si=JXBxscqAg0sjf3rV" },
-  { id: "7", name: "Sérgio Calura", youtubeUrl: "https://youtu.be/Rj1tOSIvB78?si=39zxbiMFPiKhboqj" },
-]
+const strategicTestimonials: StrategicTestimonial[] = [
+  {
+    id: "1",
+    role: "Confiança",
+    roleDescription: "Alguém que tinha receio ou insegurança antes de iniciar o tratamento.",
+    name: "Priscilla Ramos",
+    treatment: "Lentes de Contato Dentais",
+    youtubeUrl: "https://youtu.be/FMtOkxWcNMk?si=mFYuTX-7OqasY2H8",
+    quote: "A segurança e o acolhimento me fizeram perder todo o receio desde a primeira conversa.",
+  },
+  {
+    id: "2",
+    role: "Experiência",
+    roleDescription: "Alguém que destaca consulta, atenção, planejamento, explicações e tranquilidade.",
+    name: "Paulo Lima",
+    treatment: "Implantes Dentários Guiados",
+    youtubeUrl: "https://youtu.be/6D1g1-mNwM0?si=2jhTcYrNrIddz93w",
+    quote: "O nível de detalhe no planejamento e na explicação me deu total clareza do tratamento.",
+  },
+  {
+    id: "3",
+    role: "Transformação",
+    roleDescription: "Alguém que fala do resultado e do impacto na autoestima e qualidade de vida.",
+    name: "Nelcina Martins",
+    treatment: "Reabilitação Oral Completa",
+    youtubeUrl: "https://youtu.be/p8SCJUWKMow?si=FdrinNSYyUTksdb_",
+    quote: "Recuperei a alegria de sorrir e a confiança no meu dia a dia. Uma transformação real.",
+  },
+];
 
 const getYouTubeVideoId = (url: string): string | null => {
-  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/
-  const match = url.match(regex)
-  return match ? match[1] : null
-}
+  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+};
 
 const getYouTubeThumbnail = (url: string): string => {
-  const videoId = getYouTubeVideoId(url)
-  return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : "/placeholder.svg"
-}
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : "/placeholder.svg";
+};
 
 const getYouTubeEmbedUrl = (url: string): string => {
-  const videoId = getYouTubeVideoId(url)
-  return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1` : ""
-}
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1` : "";
+};
 
 export default function VideoTestimonialGallery() {
-  const [playingVideos, setPlayingVideos] = useState<{ [key: string]: boolean }>({})
-  const [scrollPosition, setScrollPosition] = useState(0)
-
-  const playVideo = (testimonialId: string) => {
-    setPlayingVideos((prev) => ({
-      ...prev,
-      [testimonialId]: true,
-    }))
-  }
-
-  const scrollUp = () => setScrollPosition((prev) => Math.max(0, prev - 1))
-  const scrollDown = () => setScrollPosition((prev) => Math.min(testimonials.length - getVisibleCount(), prev + 1))
-
-  const getVisibleCount = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1536) return 4
-      if (window.innerWidth >= 1280) return 3
-      if (window.innerWidth >= 768) return 2
-      return 1
-    }
-    return 1
-  }
-
-  const visibleTestimonials = testimonials.slice(scrollPosition, scrollPosition + getVisibleCount())
+  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
 
   return (
-    <section className="py-32 px-4 bg-transparent relative overflow-hidden z-10">
-      {/* Background Animated Orbs */}
-      <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3 z-0"
-      ></motion.div>
+    <section id="experiencias" className="py-28 md:py-36 px-4 bg-transparent relative overflow-hidden z-10">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/5 blur-[180px] rounded-full pointer-events-none z-0"></div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="text-center mb-20 relative z-10"
-      >
-        <span className="text-xs font-mont tracking-[0.4em] text-primary/60 uppercase mb-4 block">Experiências</span>
-        <h2 className="text-5xl md:text-7xl font-fair text-primary tracking-tight bg-clip-text bg-gradient-to-b from-primary to-primary/50 text-transparent drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
-          Depoimentos
-        </h2>
-        <div className="w-px h-16 bg-gradient-to-b from-primary/50 to-transparent mx-auto mt-8 mb-8"></div>
-        <p className="text-xl md:text-2xl font-lora text-white/60 max-w-3xl mx-auto font-light leading-relaxed">
-          O que os nossos pacientes falam sobre a experiência de tratar conosco
-        </p>
-      </motion.div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header da Seção 3 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1 }}
+          className="text-center mb-16 md:mb-24"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="text-xs md:text-sm font-mont tracking-[0.35em] text-primary/90 uppercase font-semibold">
+              Experiências
+            </span>
+          </div>
 
-      <div className="max-w-[90rem] mx-auto relative z-10">
-        <div className="relative">
-          {scrollPosition > 0 && (
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-              className="absolute left-0 md:-left-8 top-1/2 transform -translate-y-1/2 -ml-4 z-20"
-            >
-              <Button
-                onClick={scrollUp}
-                variant="outline"
-                size="icon"
-                className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:border-primary/50 text-primary hover:bg-primary/20 hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-pointer hover:scale-110"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </Button>
-            </motion.div>
-          )}
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-fair text-white max-w-4xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
+            Quem viveu essa experiência{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
+              conta melhor do que nós.
+            </span>
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 transition-all duration-500 ease-in-out px-4 md:px-12 py-4">
-            {visibleTestimonials.map((testimonial, idx) => (
+          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto my-8"></div>
+
+          <p className="text-lg sm:text-xl md:text-2xl font-lora text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
+            Mais do que resultados, buscamos construir uma experiência de cuidado, confiança e segurança em cada etapa do tratamento.
+          </p>
+        </motion.div>
+
+        {/* 3 Depoimentos Estratégicos: lado a lado no desktop e em carrossel/scroll no celular */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          {strategicTestimonials.map((item, index) => {
+            const isPlaying = playingVideoId === item.id;
+
+            return (
               <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 50 }}
+                key={item.id}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                className="flex flex-col h-full group"
               >
-                <Card className="h-full overflow-hidden bg-white/5 backdrop-blur-lg border border-white/5 shadow-[0_20px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_0_50px_rgba(212,175,55,0.15)] hover:border-primary/40 transition-all duration-700 group rounded-[2rem] relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"></div>
-                  
-                  <div className="aspect-[9/16] relative bg-[#050505] z-10 m-2 rounded-[1.5rem] overflow-hidden">
-                    {playingVideos[testimonial.id] ? (
+                {/* Card Container */}
+                <div className="flex-1 flex flex-col bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-transparent border border-white/10 group-hover:border-primary/40 rounded-[2.2rem] p-4 sm:p-5 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] group-hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-700 relative overflow-hidden">
+                  {/* Subtle Inner Glow */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+                  {/* Badge do Papel do Depoimento */}
+                  <div className="flex items-center justify-between mb-4 px-2 pt-1">
+                    <span className="text-xs font-mont font-bold tracking-[0.2em] uppercase text-primary/90 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                      {item.role}
+                    </span>
+                    <span className="text-xs text-white/40 font-mont">0{index + 1}</span>
+                  </div>
+
+                  {/* Video Screen / Thumbnail */}
+                  <div className="aspect-[9/16] rounded-[1.6rem] overflow-hidden relative bg-[#050505] shadow-inner mb-5 border border-white/5">
+                    {isPlaying ? (
                       <iframe
-                        src={getYouTubeEmbedUrl(testimonial.youtubeUrl)}
+                        src={getYouTubeEmbedUrl(item.youtubeUrl)}
                         className="w-full h-full"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                        title={`Depoimento de ${testimonial.name}`}
+                        title={`Depoimento de ${item.name}`}
                       />
                     ) : (
                       <>
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
                         <img
-                          src={getYouTubeThumbnail(testimonial.youtubeUrl)}
-                          alt={`Depoimento de ${testimonial.name}`}
-                          className="w-full h-full object-cover filter grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+                          src={getYouTubeThumbnail(item.youtubeUrl)}
+                          alt={`Depoimento de ${item.name}`}
+                          className="w-full h-full object-cover filter contrast-[1.05] grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
+                          loading="lazy"
                         />
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                        <div className="absolute inset-0 flex items-center justify-center z-20">
-                          <Button
-                            onClick={() => playVideo(testimonial.id)}
-                            size="icon"
-                            className="rounded-full w-20 h-20 bg-primary/90 hover:bg-primary border border-primary text-black shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:shadow-[0_0_50px_rgba(212,175,55,0.8)] transition-all duration-500 hover:scale-110 cursor-pointer"
+                        {/* Botão de Play Discreto em Dourado */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <button
+                            type="button"
+                            onClick={() => setPlayingVideoId(item.id)}
+                            aria-label={`Assistir depoimento de ${item.name}`}
+                            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/80 text-[#FFF099] flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.35)] group-hover:shadow-[0_0_40px_rgba(212,175,55,0.7)] group-hover:scale-110 group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-500 cursor-pointer"
                           >
-                            <Play className="w-8 h-8 ml-1" fill="currentColor" />
-                          </Button>
-                        </div>
-
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                          <h4 className="font-fair text-xl text-primary tracking-wide drop-shadow-md">{testimonial.name}</h4>
+                            <Play className="w-6 h-6 sm:w-7 sm:h-7 ml-1" fill="currentColor" />
+                          </button>
                         </div>
                       </>
                     )}
                   </div>
-                </Card>
+
+                  {/* Detalhes abaixo do vídeo: Nome do paciente + Tratamento realizado */}
+                  <div className="px-2 pb-2 mt-auto">
+                    <h3 className="text-xl sm:text-2xl font-fair text-white group-hover:text-[#FFF099] transition-colors duration-300">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm font-mont text-primary/80 font-medium tracking-wide mt-1">
+                      {item.treatment}
+                    </p>
+                    <p className="text-xs sm:text-sm font-lora italic text-white/50 mt-3 line-clamp-2">
+                      “{item.quote}”
+                    </p>
+                  </div>
+                </div>
               </motion.div>
-            ))}
-          </div>
-
-          {scrollPosition < testimonials.length - getVisibleCount() && (
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-              className="absolute right-0 md:-right-8 top-1/2 transform -translate-y-1/2 -mr-4 z-20"
-            >
-              <Button
-                onClick={scrollDown}
-                variant="outline"
-                size="icon"
-                className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:border-primary/50 text-primary hover:bg-primary/20 hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-pointer hover:scale-110"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </Button>
-            </motion.div>
-          )}
-
-          <div className="flex justify-center items-center mt-12 space-x-3">
-            {Array.from({ length: Math.ceil(testimonials.length / getVisibleCount()) }).map((_, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: index * 0.1 }}
-                className={`h-2 rounded-full transition-all duration-500 ${
-                  Math.floor(scrollPosition / getVisibleCount()) === index 
-                    ? "w-8 bg-primary shadow-[0_0_10px_rgba(212,175,55,0.5)]" 
-                    : "w-2 bg-white/20 hover:bg-white/40 cursor-pointer"
-                }`}
-              />
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
-      
-      {/* Spacer between video testimonials and text testimonials */}
-      <div className="h-32"></div>
-      
-      <TextTestimonials />
     </section>
-  )
+  );
 }
