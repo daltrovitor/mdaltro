@@ -29,14 +29,14 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-fair text-white max-w-4xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-white max-w-3xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
             “Antes de tratar dentes,{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
               precisamos compreender pessoas.
             </span>”
           </h2>
           
-          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto mt-8"></div>
+          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto mt-6"></div>
         </motion.div>
 
         {/* Video Player Box */}
@@ -55,7 +55,7 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/nBbzq2729xg?si=NR5BVomrUxbpeBa9"
+                src="https://www.youtube.com/embed/Mh6_5jt_RHU"
                 title="Filosofia Dr. Marcelo Daltro"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 className="w-full h-full relative z-0 filter contrast-[1.05] opacity-95 group-hover:opacity-100 transition-opacity duration-700"
@@ -64,21 +64,17 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
           </div>
         </motion.div>
 
-        {/* Post-Video Statement & CTA */}
+        {/* Post-Video Statement */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="text-center mt-12 md:mt-16 space-y-8"
+          className="text-center mt-10 md:mt-12"
         >
-          <p className="text-2xl sm:text-3xl md:text-4xl font-fair italic text-[#FFF099]/90 tracking-wide">
+          <p className="text-xl sm:text-2xl md:text-3xl font-fair italic text-[#FFF099]/90 tracking-wide">
             “Diagnosticar. Planejar. Só então, tratar.”
           </p>
-
-          <div className="pt-2">
-            <GoldCtaButton onClick={onOpenModal} text="Quero entender meu caso" />
-          </div>
         </motion.div>
       </div>
     </section>

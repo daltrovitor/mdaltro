@@ -46,9 +46,9 @@ export default function TextTestimonials() {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
             </motion.div>
-            <h2 className="text-4xl md:text-6xl font-fair text-white tracking-tight drop-shadow-md">Avaliações <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/50">Google</span></h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-white tracking-tight drop-shadow-md">Avaliações <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/50">Google</span></h2>
           </div>
-          <p className="text-xl md:text-2xl font-lora text-white/60 font-light max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg font-lora text-white/60 font-light max-w-xl mx-auto">
             A satisfação reflete em cada sorriso
           </p>
         </motion.div>

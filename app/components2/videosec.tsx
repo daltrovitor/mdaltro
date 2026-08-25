@@ -43,7 +43,7 @@ export default function Videosec({ onOpenModal }: VideosecProps) {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/nBbzq2729xg?si=NR5BVomrUxbpeBa9" 
+                src="https://www.youtube.com/embed/Mh6_5jt_RHU" 
                 title="YouTube video player"  
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 className="w-full h-full relative z-0 filter contrast-[1.1] opacity-90 group-hover:opacity-100 transition-opacity duration-1000"  

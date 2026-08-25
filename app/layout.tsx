@@ -338,7 +338,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`font-sans ${geistSans.variable} ${geistMono.variable} ${jost.variable} ${josefinSans.variable} ${playfairDisplay.variable} ${montserrat.variable} ${lora.variable} antialiased`}>
+      <body
+        suppressHydrationWarning
+        className={`font-sans ${geistSans.variable} ${geistMono.variable} ${jost.variable} ${josefinSans.variable} ${playfairDisplay.variable} ${montserrat.variable} ${lora.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

@@ -84,16 +84,16 @@ export default function VideoTestimonialGallery() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-fair text-white max-w-4xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-white max-w-3xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
             Quem viveu essa experiência{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
               conta melhor do que nós.
             </span>
           </h2>
 
-          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto my-8"></div>
+          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto my-6"></div>
 
-          <p className="text-lg sm:text-xl md:text-2xl font-lora text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg font-lora text-white/70 max-w-2xl mx-auto font-light leading-relaxed">
             Mais do que resultados, buscamos construir uma experiência de cuidado, confiança e segurança em cada etapa do tratamento.
           </p>
         </motion.div>

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Phone, MapPin, Mail, Instagram, Facebook, Linkedin, Sparkles } from "lucide-react";
 
 // Components for each planned section
+import Hero from "@/app/components2/hero";
 import SmoothScroll from "@/app/components2/smoothscroll";
 import Philosophy from "@/app/components2/philosophy";
 import VideoTestimonialGallery from "@/app/components2/testimonial";
@@ -34,67 +35,10 @@ export default function HomePage() {
         {/* High-tech animated cyber grid background */}
         <div className="fixed inset-0 z-0 pointer-events-none bg-[linear-gradient(to_right,#d4af3708_1px,transparent_1px),linear-gradient(to_bottom,#d4af3708_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_30%,#000_20%,transparent_100%)]"></div>
 
-        {/* Floating Header */}
-        <header className="fixed top-0 inset-x-0 z-40 bg-black/70 backdrop-blur-xl border-b border-white/5 py-4 transition-all duration-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <a href="#" className="flex items-center gap-3">
-              <Image
-                src="/logo1.png"
-                alt="Dr. Marcelo Daltro Logo"
-                width={200}
-                height={50}
-                className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]"
-                priority
-              />
-            </a>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="https://wa.me/5562991873755"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 text-xs font-mont tracking-wider text-white/80 hover:text-primary transition-colors uppercase"
-              >
-                <Phone className="w-3.5 h-3.5 text-primary" />
-                <span>(62) 99187-3755</span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(true)}
-                className="px-5 py-2.5 rounded-full text-xs font-mont font-bold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-black hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(212,175,55,0.25)] cursor-pointer"
-              >
-                Entender Meu Caso
-              </button>
-            </div>
-          </div>
-        </header>
-
         {/* =========================================================================
-            SEÇÃO 1: HEADLINE + SUB-HEADLINE (IMAGEM HERO CLEAN)
+            SEÇÃO 1: HERO PERSONALIZADA
             ========================================================================= */}
-        <section className="relative w-full pt-20 sm:pt-24 pb-8 sm:pb-12 flex items-center justify-center overflow-hidden">
-          {/* Ambient glow behind hero banner */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-primary/10 blur-[160px] rounded-full pointer-events-none z-0"></div>
-
-          <div className="w-full max-w-[1400px] mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative w-full rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.9)] bg-black"
-            >
-              <Image
-                src="/hero12.jpg"
-                alt="Dr. Marcelo Daltro - Reabilitação Oral e Odontologia Estética"
-                width={1920}
-                height={1080}
-                priority
-                className="w-full h-auto object-contain block"
-              />
-            </motion.div>
-          </div>
-        </section>
+        <Hero onOpenModal={() => setIsModalOpen(true)} logoSrc="/logo2.png" />
 
         {/* Futuristic Separator */}
         <div className="relative w-full z-20 flex justify-center py-4 bg-[#050505]">
@@ -203,14 +147,14 @@ export default function HomePage() {
                 </span>
               </div>
 
-              <h2 className="text-3xl sm:text-5xl md:text-6xl font-fair text-white max-w-3xl mx-auto leading-tight mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-white max-w-2xl mx-auto leading-tight mb-4">
                 Pronto para compreender o seu caso com{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37]">
                   atenção e clareza?
                 </span>
               </h2>
 
-              <p className="text-base sm:text-xl font-lora text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm md:text-base font-lora text-white/70 max-w-xl mx-auto mb-8 leading-relaxed font-light">
                 Clique abaixo e responda algumas perguntas rápidas. Nossa equipe analisará seu caso para orientar o melhor caminho.
               </p>
 
@@ -224,21 +168,21 @@ export default function HomePage() {
         {/* =========================================================================
             SEÇÃO 11: LOCALIZAÇÃO / RODAPÉ
             ========================================================================= */}
-        <section id="localizacao" className="bg-transparent py-24 relative z-10">
+        <section id="localizacao" className="bg-transparent py-20 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <span className="text-xs font-mont tracking-[0.4em] text-primary/60 uppercase mb-4 block">
+            <span className="text-[11px] font-mont tracking-[0.4em] text-primary/60 uppercase mb-3 block">
               Onde Estamos
             </span>
-            <h2 className="text-4xl sm:text-6xl font-fair text-primary tracking-tight bg-clip-text bg-gradient-to-b from-primary to-primary/50 text-transparent">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-primary tracking-tight bg-clip-text bg-gradient-to-b from-primary to-primary/50 text-transparent">
               Localização
             </h2>
-            <div className="w-px h-16 bg-gradient-to-b from-primary/50 to-transparent mx-auto mt-8"></div>
+            <div className="w-px h-12 bg-gradient-to-b from-primary/50 to-transparent mx-auto mt-6"></div>
           </motion.div>
 
           <motion.div
@@ -302,7 +246,7 @@ export default function HomePage() {
                   <Image
                     width={280}
                     height={80}
-                    src="/logo2.jpeg"
+                    src="/logo2.png"
                     alt="Logo Marcelo Daltro"
                     className="w-56 md:w-64 object-contain rounded-2xl drop-shadow-[0_0_25px_rgba(212,175,55,0.25)]"
                   />

@@ -75,16 +75,16 @@ export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-fair text-white max-w-4xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-fair text-white max-w-3xl mx-auto leading-tight md:leading-[1.2] tracking-tight">
             Diferentes necessidades.{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]">
               Soluções individualizadas.
             </span>
           </h2>
 
-          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto my-8"></div>
+          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto my-6"></div>
 
-          <p className="text-lg sm:text-xl md:text-2xl font-lora text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg font-lora text-white/70 max-w-2xl mx-auto font-light leading-relaxed">
             Cada sorriso apresenta necessidades diferentes. Por isso, o tratamento não parte de uma técnica predeterminada, mas do diagnóstico e dos objetivos de cada paciente.
           </p>
         </motion.div>
@@ -100,28 +100,28 @@ export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
               transition={{ duration: 0.7, delay: index * 0.1 }}
               className="flex flex-col h-full group"
             >
-              <div className="flex-1 flex flex-col justify-between p-7 sm:p-8 rounded-[2rem] bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border border-white/10 hover:border-primary/40 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-500 relative overflow-hidden">
+              <div className="flex-1 flex flex-col justify-between p-6 sm:p-7 rounded-[2rem] bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border border-white/10 hover:border-primary/40 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-500 relative overflow-hidden">
                 {/* Glow on hover */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
                 <div>
                   {/* Card Number Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl sm:text-3xl font-mont font-bold text-primary/40 group-hover:text-primary transition-colors duration-500 tracking-tighter">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xl sm:text-2xl font-mont font-bold text-primary/40 group-hover:text-primary transition-colors duration-500 tracking-tighter">
                       {item.num}
                     </span>
-                    <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary/60 group-hover:text-primary group-hover:border-primary/40 transition-all duration-300">
-                      <ArrowRight className="w-4 h-4" />
+                    <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary/60 group-hover:text-primary group-hover:border-primary/40 transition-all duration-300">
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
 
                   {/* Card Title */}
-                  <h3 className="text-xl sm:text-2xl font-fair text-white group-hover:text-[#FFF099] transition-colors duration-300 leading-snug mb-4">
+                  <h3 className="text-lg sm:text-xl font-fair text-white group-hover:text-[#FFF099] transition-colors duration-300 leading-snug mb-3">
                     {item.title}
                   </h3>
 
                   {/* Card Description */}
-                  <p className="text-sm sm:text-base font-lora text-white/65 leading-relaxed font-light mb-8">
+                  <p className="text-xs sm:text-sm font-lora text-white/65 leading-relaxed font-light mb-6">
                     {item.description}
                   </p>
                 </div>
@@ -132,7 +132,7 @@ export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
                     {item.tags.map((tag, tIndex) => (
                       <span
                         key={tIndex}
-                        className="px-2.5 py-1 rounded-full text-xs font-mont bg-white/5 border border-white/10 text-white/60 group-hover:border-primary/20 group-hover:text-primary/90 transition-colors duration-300"
+                        className="px-2.5 py-0.5 rounded-full text-[11px] font-mont bg-white/5 border border-white/10 text-white/60 group-hover:border-primary/20 group-hover:text-primary/90 transition-colors duration-300"
                       >
                         {tag}
                       </span>
@@ -144,21 +144,17 @@ export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
           ))}
         </div>
 
-        {/* Closing statement & CTA */}
+        {/* Closing statement */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center mt-20 md:mt-24 space-y-8"
+          className="text-center mt-16 md:mt-20"
         >
-          <p className="text-lg sm:text-xl md:text-2xl font-lora italic text-white/80 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg font-lora italic text-white/80 max-w-xl mx-auto">
             A indicação do tratamento é sempre resultado de uma avaliação individualizada.
           </p>
-
-          <div className="pt-2">
-            <GoldCtaButton onClick={onOpenModal} text="Quero entender meu caso" />
-          </div>
         </motion.div>
       </div>
     </section>
