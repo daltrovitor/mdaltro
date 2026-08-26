@@ -58,7 +58,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso11.jpeg",
         title: "Sorriso Inicial Frontal",
-        stage: "Antes ",
+        stage: "Antes",
         isBefore: true,
         description:
           "Situação inicial: registro frontal mostrando o alinhamento, forma e proporções anatômicas antes de iniciar o planejamento.",
@@ -66,7 +66,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso12.jpeg",
         title: "Resultado Final da Transformação",
-        stage: "Depois ",
+        stage: "Depois",
         isBefore: false,
         description:
           "Resultado final: restabelecimento das proporções áureas, equilíbrio de cor e textura natural das lentes cerâmicas em harmonia com os lábios.",
@@ -74,7 +74,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso13.jpeg",
         title: "Registro de Detalhe Inicial",
-        stage: "Antes ",
+        stage: "Antes",
         isBefore: true,
         description:
           "Vista detalhada das bordas incisais e estrutura dentária prévia, identificando áreas de desgaste e assimetria.",
@@ -82,7 +82,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso14.jpeg",
         title: "Textura & Acabamento Cerâmico",
-        stage: "Depois ",
+        stage: "Depois",
         isBefore: false,
         description:
           "Macrofotografia demonstrando a microtextura superficial, translucidez nas pontas incisais e acabamento marginal impecável.",
@@ -90,7 +90,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso15.jpeg",
         title: "Visão Lateral / Oclusal Inicial",
-        stage: "Antes ",
+        stage: "Antes",
         isBefore: true,
         description:
           "Avaliação de arco e plano oclusal no início do tratamento para planejar a guia anterior e a função mastigatória correta.",
@@ -98,7 +98,7 @@ const clinicalCases: CaseStudy[] = [
       {
         src: "/caso16.jpeg",
         title: "Integração Estética e Oclusal Final",
-        stage: "Depois ",
+        stage: "Depois",
         isBefore: false,
         description:
           "Finalização completa: estabilidade oclusal recuperada, saúde gengival preservada e novo padrão estético refinado.",
@@ -107,55 +107,117 @@ const clinicalCases: CaseStudy[] = [
   },
   {
     id: "caso-2",
-    title: "Harmonização do Sorriso & Lâminas Cerâmicas Puras",
-    tag: "Facetas em Cerâmica",
+    title: "Porcelana tipo Lentes de Contato",
+    tag: "Porcelana tipo Lentes de Contato",
     summary:
-      "Correção de descolorações intrínsecas, fechamento de diastemas e alinhamento de forma e volume com preservação estrutural.",
+      "Transformação estética refinada através de laminados em porcelana pura, restabelecendo a harmonia do sorriso, alinhamento e proporções com máxima naturalidade.",
     clinicalDetails:
-      "O planejamento individualizado permitiu harmonizar o corredor bucal e a linha do sorriso através de cerâmicas ultrafinas confeccionadas com tecnologia computadorizada, alcançando um resultado luminoso e imperceptível.",
-    patientProfile: "Busca por rejuvenescimento do sorriso e correção de desproporções.",
+      "Caso planejado digitalmente para correção de forma, textura e proporção dental. Com lâminas ultrafinas em porcelana de alta densidade confeccionadas sob medida, alcançamos integração estética perfeita com a linha do sorriso e preservação máxima do esmalte biológico.",
+    patientProfile: "Queixa de formato, cor e proporção dos dentes anteriores.",
+    beforeImage: "/caso21.jpeg", // Final ímpar = Antes
+    afterImage: "/caso22.jpeg",  // Final par = Depois
+    photos: [
+      {
+        src: "/caso21.jpeg",
+        title: "Sorriso Inicial Frontal",
+        stage: "Antes",
+        isBefore: true,
+        description:
+          "Situação inicial: registro fotográfico prévio demonstrando a anatomia, desproporções e aspecto estético antes do tratamento.",
+      },
+      {
+        src: "/caso22.jpeg",
+        title: "Resultado Final com Porcelanas",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Resultado final: harmonização estética completa com lentes em porcelana, devolvendo luminosidade, brilho natural e proporções áureas.",
+      },
+      {
+        src: "/caso23.jpeg",
+        title: "Registro de Detalhe Inicial",
+        stage: "Antes",
+        isBefore: true,
+        description:
+          "Visualização em close das características anatômicas e bordas dos dentes no ponto de partida.",
+      },
+      {
+        src: "/caso24.jpeg",
+        title: "Textura & Acabamento em Porcelana",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Macrofotografia evidenciando a microtextura superficial, translucidez natural e adaptação biológica refinada.",
+      },
+      {
+        src: "/caso25.jpeg",
+        title: "Visão Lateral / Oclusal Inicial",
+        stage: "Antes",
+        isBefore: true,
+        description:
+          "Avaliação lateral e funcional do arco dental antes do planejamento das lâminas cerâmicas.",
+      },
+      {
+        src: "/caso26.jpeg",
+        title: "Integração Estética e Funcional Final",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Finalização completa: estabilidade oclusal e perfeita integração com a linha labial e dinâmica do sorriso.",
+      },
+    ],
+  },
+  {
+    id: "caso-3",
+    title: "Facetas de Porcelana",
+    tag: "Facetas de Porcelana",
+    summary:
+      "Correção precisa de cor, fechamento de espaços e reanatomização dental com facetas cerâmicas de alta translucidez e durabilidade.",
+    clinicalDetails:
+      "Planejamento com tecnologia 3D e confecção de facetas cerâmicas personalizadas para harmonizar o corredor bucal e a linha labial com mínima intervenção e máxima retenção biológica.",
+    patientProfile: "Busca por alinhamento estético e restauração de dentes desgastados.",
     beforeImage: "/3.jpg",
     afterImage: "/4.jpg",
     photos: [
       {
         src: "/3.jpg",
-        title: "Avaliação Inicial do Sorriso",
+        title: "Situação Inicial",
         stage: "Antes",
         isBefore: true,
         description:
-          "Desgastes incisais severos e assimetrias no plano estético anterior.",
+          "Registro fotográfico inicial identificando assimetrias e perda de volume dental anterior.",
       },
       {
         src: "/4.jpg",
-        title: "Reabilitação Estética Final",
+        title: "Resultado com Facetas",
         stage: "Depois",
         isBefore: false,
         description:
-          "Restabelecimento da anatomia, proporções e alinhamento do sorriso com porcelana pura.",
+          "Resultado final pós-cimentação das facetas cerâmicas com anatomia e brilho natural restabelecidos.",
       },
       {
         src: "/dente1.jpeg",
-        title: "Escultura Cerâmica de Precisão",
+        title: "Escultura Cerâmica",
         stage: "Laboratorial",
         isBefore: false,
         description:
-          "Lâmina ultrafina de alta densidade esculpida para máxima preservação dental.",
+          "Facetas confeccionadas em cerâmica pura com fidelidade micrométrica às proporções planejadas.",
       },
       {
         src: "/dente2.jpeg",
-        title: "Preparo Biológico Mínimo",
+        title: "Preparo Minimamente Invasivo",
         stage: "Etapa Clínica",
         isBefore: true,
         description:
-          "Preparo estritamente necessário para inserção das lâminas sem agressão pulpar.",
+          "Preparo conservador preservando ao máximo a estrutura do esmalte dentário.",
       },
       {
         src: "/dente3.jpeg",
-        title: "Integração Facial e Linha Labial",
+        title: "Harmonia Facial e Sorriso Frontal",
         stage: "Depois",
         isBefore: false,
         description:
-          "Sorriso projetado em harmonia com as linhas dinâmicas de expressão facial.",
+          "Sorriso projetado para valorizar a expressão natural e as proporções do rosto.",
       },
       {
         src: "/dente4.jpeg",
@@ -163,53 +225,7 @@ const clinicalCases: CaseStudy[] = [
         stage: "Depois",
         isBefore: false,
         description:
-          "Gradiente de opacidade que imita fielmente as camadas do dente biológico.",
-      },
-    ],
-  },
-  {
-    id: "caso-3",
-    title: "Implantes Dentários Guiados 3D & Prótese Cerâmica",
-    tag: "Implantes Guiados 3D",
-    summary:
-      "Reconstrução precisa da função mastigatória e reposição de elementos dentários através de cirurgia guiada sem cortes extensos.",
-    clinicalDetails:
-      "Utilizando tomografia computadorizada e escaneamento intraoral, o implante foi posicionado de forma virtual prévia. A cirurgia guiada permitiu a instalação milimétrica sem retalhos extensos nem pontos, com pós-operatório confortável e adaptação imediata.",
-    patientProfile: "Ausência dentária posterior e necessidade de restabelecimento mastigatório.",
-    beforeImage: "/caso13.jpeg",
-    afterImage: "/caso14.jpeg",
-    photos: [
-      {
-        src: "/caso13.jpeg",
-        title: "Situação Inicial Prévia",
-        stage: "Antes ",
-        isBefore: true,
-        description:
-          "Ausência de suporte mastigatório e perda de volume ósseo anterior ao procedimento.",
-      },
-      {
-        src: "/caso14.jpeg",
-        title: "Restauração Final Implantosuportada",
-        stage: "Depois ",
-        isBefore: false,
-        description:
-          "Coroa cerâmica computadorizada perfeitamente integrada ao perfil gengival biológico.",
-      },
-      {
-        src: "/sec41.jpeg",
-        title: "Planejamento Cirúrgico Digital 3D",
-        stage: "Diagnóstico",
-        isBefore: true,
-        description:
-          "Mapeamento tomográfico tridimensional para determinar o posicionamento do implante.",
-      },
-      {
-        src: "/sec42.jpeg",
-        title: "Finalização Protética & Oclusão",
-        stage: "Depois",
-        isBefore: false,
-        description:
-          "Restauração da eficiência mastigatória com estabilidade e longevidade comprovadas.",
+          "Microtexturas e luminosidade perfeitamente integradas à dentição natural.",
       },
     ],
   },
