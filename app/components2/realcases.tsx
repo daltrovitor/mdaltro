@@ -178,7 +178,7 @@ const clinicalCases: CaseStudy[] = [
     afterImage: "/4.jpg",
     photos: [
       {
-        src: "/3.jpg",
+        src: "/caso31.jpeg",
         title: "Situação Inicial",
         stage: "Antes",
         isBefore: true,
@@ -186,7 +186,7 @@ const clinicalCases: CaseStudy[] = [
           "Registro fotográfico inicial identificando assimetrias e perda de volume dental anterior.",
       },
       {
-        src: "/4.jpg",
+        src: "/caso32.jpeg",
         title: "Resultado com Facetas",
         stage: "Depois",
         isBefore: false,
@@ -194,7 +194,7 @@ const clinicalCases: CaseStudy[] = [
           "Resultado final pós-cimentação das facetas cerâmicas com anatomia e brilho natural restabelecidos.",
       },
       {
-        src: "/dente1.jpeg",
+        src: "/caso33.jpeg",
         title: "Escultura Cerâmica",
         stage: "Laboratorial",
         isBefore: false,
@@ -202,7 +202,7 @@ const clinicalCases: CaseStudy[] = [
           "Facetas confeccionadas em cerâmica pura com fidelidade micrométrica às proporções planejadas.",
       },
       {
-        src: "/dente2.jpeg",
+        src: "/caso34.jpeg",
         title: "Preparo Minimamente Invasivo",
         stage: "Etapa Clínica",
         isBefore: true,
@@ -210,7 +210,7 @@ const clinicalCases: CaseStudy[] = [
           "Preparo conservador preservando ao máximo a estrutura do esmalte dentário.",
       },
       {
-        src: "/dente3.jpeg",
+        src: "/caso35.jpeg",
         title: "Harmonia Facial e Sorriso Frontal",
         stage: "Depois",
         isBefore: false,
@@ -218,7 +218,7 @@ const clinicalCases: CaseStudy[] = [
           "Sorriso projetado para valorizar a expressão natural e as proporções do rosto.",
       },
       {
-        src: "/dente4.jpeg",
+        src: "/caso36.jpeg",
         title: "Vista Lateral & Textura",
         stage: "Depois",
         isBefore: false,
