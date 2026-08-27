@@ -13,9 +13,7 @@ import {
   ChevronRight,
   Images,
   Info,
-  Calendar,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 
 interface RealCasesProps {
@@ -231,33 +229,21 @@ const clinicalCases: CaseStudy[] = [
   },
 ];
 
-export default function RealCases({ onOpenModal }: RealCasesProps) {
-  // State for active selected case in the main comparator
-  const [selectedCaseId, setSelectedCaseId] = useState<string>("caso-1");
+// Componente individual para cada card grandão de Antes e Depois
+function CaseItemComparator({
+  caseItem,
+  onOpenGallery,
+}: {
+  caseItem: CaseStudy;
+  onOpenGallery: () => void;
+}) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const sliderContainerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // State for expanded gallery modal
-  const [modalCase, setModalCase] = useState<CaseStudy | null>(null);
-  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
-
-  const activeCase = clinicalCases.find((c) => c.id === selectedCaseId) || clinicalCases[0];
-
-  const handleOpenCaseGallery = (caseItem: CaseStudy, initialIndex = 0) => {
-    setModalCase(caseItem);
-    setActivePhotoIndex(initialIndex);
-  };
-
-  const handleCloseCaseGallery = () => {
-    setModalCase(null);
-    setActivePhotoIndex(0);
-  };
-
-  // Slider drag handling
   const handleSliderMove = useCallback((clientX: number) => {
-    if (!sliderContainerRef.current) return;
-    const rect = sliderContainerRef.current.getBoundingClientRect();
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
@@ -295,7 +281,159 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
     };
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
-  // Lock body scroll when gallery modal is open
+  return (
+    <div className="p-4 sm:p-7 md:p-9 rounded-[2.2rem] bg-gradient-to-b from-white/[0.08] via-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] relative overflow-hidden">
+      {/* Header do Caso */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 sm:mb-6">
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-[11px] font-mont text-primary/90 font-semibold tracking-wider uppercase">
+              {caseItem.tag}
+            </span>
+            <span className="text-[11px] text-white/50 font-mont">
+              {caseItem.photos.length} Fotos no Caso
+            </span>
+          </div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-fair text-white">
+            {caseItem.title}
+          </h3>
+        </div>
+
+        {/* Botão Ver Mais / Ver Caso Completo */}
+        <button
+          type="button"
+          onClick={onOpenGallery}
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFF099] text-black text-xs font-mont font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(212,175,55,0.35)] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)] hover:scale-105 group cursor-pointer shrink-0 self-start md:self-auto"
+        >
+          <Images className="w-4 h-4 text-black" />
+          <span>Ver Mais • Galeria Completa</span>
+        </button>
+      </div>
+
+      {/* Comparador com Clip-Path Perfeito (Sem diferença de zoom entre antes e depois) */}
+      <div
+        ref={containerRef}
+        onMouseDown={() => setIsDragging(true)}
+        onTouchMove={handleTouchMove}
+        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/10] rounded-[1.6rem] sm:rounded-[2rem] overflow-hidden select-none border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] bg-black cursor-ew-resize group"
+      >
+        {/* Layer 1: Depois (Fundo Completo) */}
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src={caseItem.afterImage}
+            alt="Depois - Resultado Final"
+            fill
+            priority
+            className="object-cover object-center pointer-events-none filter contrast-[1.05]"
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
+          <div className="absolute top-4 right-4 z-10">
+            <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-xs font-mont font-bold text-[#FFF099] tracking-wider uppercase shadow-lg">
+              Depois
+            </span>
+          </div>
+        </div>
+
+        {/* Layer 2: Antes (Recortada por clipPath mantendo a mesma dimensão e escala exatas) */}
+        <div
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        >
+          <Image
+            src={caseItem.beforeImage}
+            alt="Antes - Situação Inicial"
+            fill
+            priority
+            className="object-cover object-center pointer-events-none filter contrast-[1.05]"
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
+          <div className="absolute top-4 left-4 z-10">
+            <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/30 text-xs font-mont font-bold text-white/90 tracking-wider uppercase shadow-lg">
+              Antes
+            </span>
+          </div>
+        </div>
+
+        {/* Divisor do Slider */}
+        <div
+          className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-[#FFF099] to-primary pointer-events-none z-20 shadow-[0_0_15px_rgba(212,175,55,0.8)]"
+          style={{ left: `${sliderPosition}%` }}
+        >
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/90 border-2 border-[#D4AF37] text-[#FFF099] shadow-[0_0_20px_rgba(212,175,55,0.6)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <ChevronsLeftRight className="w-4 h-4" />
+          </div>
+        </div>
+
+        {/* Botão de Expansão no Rodapé da Foto */}
+        <div
+          onClick={onOpenGallery}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-primary/40 text-[#FFF099] text-[11px] sm:text-xs font-mont font-medium tracking-wide pointer-events-auto hover:bg-[#D4AF37] hover:text-black transition-all cursor-pointer flex items-center gap-2 shadow-xl"
+        >
+          <Maximize2 className="w-3.5 h-3.5" />
+          <span>Ver Mais • Ampliar fotos com slide</span>
+        </div>
+      </div>
+
+      {/* Resumo e Botões de Controle Rápido */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-5 pt-4 border-t border-white/10">
+        <p className="text-xs sm:text-sm font-lora text-white/70 font-light leading-relaxed text-center sm:text-left">
+          {caseItem.summary}
+        </p>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => setSliderPosition(0)}
+            className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
+              sliderPosition === 0
+                ? "bg-primary text-black font-bold"
+                : "bg-white/5 text-white/60 hover:text-white"
+            }`}
+          >
+            100% Depois
+          </button>
+          <button
+            type="button"
+            onClick={() => setSliderPosition(50)}
+            className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
+              sliderPosition === 50
+                ? "bg-primary text-black font-bold"
+                : "bg-white/5 text-white/60 hover:text-white"
+            }`}
+          >
+            50 / 50
+          </button>
+          <button
+            type="button"
+            onClick={() => setSliderPosition(100)}
+            className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
+              sliderPosition === 100
+                ? "bg-primary text-black font-bold"
+                : "bg-white/5 text-white/60 hover:text-white"
+            }`}
+          >
+            100% Antes
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function RealCases({ onOpenModal }: RealCasesProps) {
+  const [modalCase, setModalCase] = useState<CaseStudy | null>(null);
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+
+  const handleOpenCaseGallery = (caseItem: CaseStudy, initialIndex = 0) => {
+    setModalCase(caseItem);
+    setActivePhotoIndex(initialIndex);
+  };
+
+  const handleCloseCaseGallery = () => {
+    setModalCase(null);
+    setActivePhotoIndex(0);
+  };
+
   useEffect(() => {
     if (modalCase) {
       document.body.style.overflow = "hidden";
@@ -307,7 +445,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
     };
   }, [modalCase]);
 
-  // Keyboard navigation for gallery modal
   useEffect(() => {
     if (!modalCase) return;
 
@@ -329,11 +466,10 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
 
   return (
     <section id="casos-reais" className="py-20 md:py-28 bg-transparent relative z-10 overflow-hidden">
-      {/* Ambient background glow */}
       <div className="absolute top-1/2 right-1/4 w-[700px] h-[500px] bg-primary/5 blur-[180px] rounded-full pointer-events-none z-0"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Header da Seção */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -360,276 +496,31 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
           <p className="text-xs sm:text-sm md:text-base font-lora text-white/70 max-w-2xl mx-auto font-light leading-relaxed">
             Cada sorriso é único. Arraste o comparador de antes e depois e clique em <b>Ver Mais</b> para abrir a galeria completa com as fotos ampliadas e detalhes do planejamento.
           </p>
-
-          {/* Cases Switcher Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
-            {clinicalCases.map((c, index) => (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => {
-                  setSelectedCaseId(c.id);
-                  setSliderPosition(50);
-                }}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-mont tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
-                  selectedCaseId === c.id
-                    ? "bg-[#D4AF37] text-black font-bold shadow-[0_0_25px_rgba(212,175,55,0.35)] scale-105"
-                    : "bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10"
-                }`}
-              >
-                <span>Caso 0{index + 1}</span>
-                <span className="opacity-70 text-[10px] hidden sm:inline">• {c.tag}</span>
-              </button>
-            ))}
-          </div>
         </motion.div>
 
-        {/* =========================================================================
-            FEATURED INTERACTIVE BEFORE / AFTER HERO COMPARATOR
-            ========================================================================= */}
-        <motion.div
-          key={activeCase.id}
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
-        >
-          <div className="p-4 sm:p-7 md:p-9 rounded-[2.2rem] bg-gradient-to-b from-white/[0.08] via-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] relative overflow-hidden">
-            
-            {/* Header of the featured case */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 sm:mb-6">
-              <div>
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-[11px] font-mont text-primary/90 font-semibold tracking-wider uppercase">
-                    {activeCase.tag}
-                  </span>
-                  <span className="text-[11px] text-white/50 font-mont">
-                    {activeCase.photos.length} Fotos no Caso
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-fair text-white">
-                  {activeCase.title}
-                </h3>
-              </div>
-
-              {/* Botão Ver Mais / Ver Caso Completo */}
-              <button
-                type="button"
-                onClick={() => handleOpenCaseGallery(activeCase, 0)}
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFF099] text-black text-xs font-mont font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(212,175,55,0.35)] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)] hover:scale-105 group cursor-pointer shrink-0 self-start md:self-auto"
-              >
-                <Images className="w-4 h-4 text-black" />
-                <span>Ver Mais • Galeria Completa</span>
-              </button>
-            </div>
-
-            {/* Interactive Before/After Visual Box (Principais: caso11 Antes / caso12 Depois) */}
-            <div
-              ref={sliderContainerRef}
-              onMouseDown={() => setIsDragging(true)}
-              onTouchMove={handleTouchMove}
-              className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/10] rounded-[1.6rem] sm:rounded-[2rem] overflow-hidden select-none border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] bg-black cursor-ew-resize group"
-            >
-              {/* After Image (Background / Full Width - Final Par: caso12) */}
-              <div className="absolute inset-0 w-full h-full">
-                <Image
-                  src={activeCase.afterImage}
-                  alt="Depois - Resultado Final "
-                  fill
-                  priority
-                  className="object-cover object-center pointer-events-none filter contrast-[1.05]"
-                  sizes="(max-width: 1200px) 100vw, 1200px"
-                />
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-xs font-mont font-bold text-[#FFF099] tracking-wider uppercase shadow-lg">
-                    Depois 
-                  </span>
-                </div>
-              </div>
-
-              {/* Before Image (Foreground / Clipped Width - Final Ímpar: caso11) */}
-              <div
-                className="absolute inset-0 h-full overflow-hidden"
-                style={{ width: `${sliderPosition}%` }}
-              >
-                <div className="relative w-full h-full min-w-[100vw] max-w-none">
-                  {/* Container match to prevent squishing */}
-                  <div
-                    style={{
-                      width: sliderContainerRef.current
-                        ? `${sliderContainerRef.current.clientWidth}px`
-                        : "100%",
-                      height: "100%",
-                      position: "relative",
-                    }}
-                  >
-                    <Image
-                      src={activeCase.beforeImage}
-                      alt="Antes - Situação Inicial "
-                      fill
-                      priority
-                      className="object-cover object-center pointer-events-none filter contrast-[1.05]"
-                      sizes="(max-width: 1200px) 100vw, 1200px"
-                    />
-                  </div>
-                </div>
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/30 text-xs font-mont font-bold text-white/90 tracking-wider uppercase shadow-lg">
-                    Antes 
-                  </span>
-                </div>
-              </div>
-
-              {/* Vertical Slider Divider Line */}
-              <div
-                className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-[#FFF099] to-primary pointer-events-none z-20 shadow-[0_0_15px_rgba(212,175,55,0.8)]"
-                style={{ left: `${sliderPosition}%` }}
-              >
-                {/* Center Drag Handle Button */}
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/90 border-2 border-[#D4AF37] text-[#FFF099] shadow-[0_0_20px_rgba(212,175,55,0.6)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <ChevronsLeftRight className="w-4 h-4" />
-                </div>
-              </div>
-
-              {/* Click overlay button on bottom */}
-              <div
-                onClick={() => handleOpenCaseGallery(activeCase, 0)}
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-primary/40 text-[#FFF099] text-[11px] sm:text-xs font-mont font-medium tracking-wide pointer-events-auto hover:bg-[#D4AF37] hover:text-black transition-all cursor-pointer flex items-center gap-2 shadow-xl"
-              >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Ver Mais • Ampliar fotos com slide</span>
-              </div>
-            </div>
-
-            {/* Quick slider presets & Case summary */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-5 pt-4 border-t border-white/10">
-              <p className="text-xs sm:text-sm font-lora text-white/70 font-light leading-relaxed text-center sm:text-left">
-                {activeCase.summary}
-              </p>
-
-              {/* Quick control buttons */}
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setSliderPosition(0)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
-                    sliderPosition === 0
-                      ? "bg-primary text-black font-bold"
-                      : "bg-white/5 text-white/60 hover:text-white"
-                  }`}
-                >
-                  100% Depois
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSliderPosition(50)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
-                    sliderPosition === 50
-                      ? "bg-primary text-black font-bold"
-                      : "bg-white/5 text-white/60 hover:text-white"
-                  }`}
-                >
-                  50 / 50
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSliderPosition(100)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
-                    sliderPosition === 100
-                      ? "bg-primary text-black font-bold"
-                      : "bg-white/5 text-white/60 hover:text-white"
-                  }`}
-                >
-                  100% Antes
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* =========================================================================
-            ADDITIONAL CLINICAL CASES GALLERY CARDS
-            ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {clinicalCases.map((item, index) => (
+        {/* 3 Casos Empilhados Verticalmente (Sem abas e sem cards pequenos) */}
+        <div className="space-y-12 md:space-y-16">
+          {clinicalCases.map((caseItem, index) => (
             <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              key={caseItem.id}
+              initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              onClick={() => handleOpenCaseGallery(item, 0)}
-              className="group flex flex-col h-full cursor-pointer"
+              transition={{ duration: 0.8, delay: index * 0.1 }}
             >
-              <div className="h-full flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border border-white/10 group-hover:border-primary/50 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] group-hover:shadow-[0_0_40px_rgba(212,175,55,0.2)] p-4 sm:p-5 transition-all duration-700 relative overflow-hidden">
-                {/* Glow on hover */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-
-                {/* Main Card Image with interactive prompt */}
-                <div className="aspect-[16/11] w-full rounded-[1.4rem] overflow-hidden relative mb-4 border border-white/10 shadow-lg bg-black">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 opacity-70 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
-                  <Image
-                    src={item.afterImage}
-                    alt={item.title}
-                    fill
-                    className="object-cover filter contrast-[1.05] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-
-                  {/* Tag top-left */}
-                  <div className="absolute top-3 left-3 z-20">
-                    <span className="px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-primary/30 text-[10px] font-mont text-primary/90 font-medium tracking-wide flex items-center gap-1.5">
-                      <ShieldCheck className="w-3 h-3 text-primary" />
-                      {item.tag}
-                    </span>
-                  </div>
-
-                  {/* Photo counter badge top-right */}
-                  <div className="absolute top-3 right-3 z-20">
-                    <span className="px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-[10px] font-mont text-white/80 font-medium flex items-center gap-1">
-                      <Images className="w-3 h-3 text-primary" />
-                      {item.photos.length} fotos
-                    </span>
-                  </div>
-
-                  {/* Hover expansion prompt */}
-                  <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="px-4 py-2 rounded-full bg-black/85 backdrop-blur-md border border-[#D4AF37] text-xs font-mont font-bold uppercase tracking-wider text-[#FFF099] shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center gap-2">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                      Ver Mais
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="px-1 pb-1 mt-auto">
-                  <h3 className="text-base sm:text-lg font-fair text-white group-hover:text-[#FFF099] transition-colors duration-300 mb-1.5 leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs font-lora text-white/65 leading-relaxed font-light line-clamp-2">
-                    {item.summary}
-                  </p>
-
-                  <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mont text-primary/80">
-                    <span className="flex items-center gap-1 font-semibold">
-                      Ver Caso Completo <ArrowRight className="w-3 h-3" />
-                    </span>
-                    <span className="text-[10px] text-white/40">Antes & Depois</span>
-                  </div>
-                </div>
-              </div>
+              <CaseItemComparator
+                caseItem={caseItem}
+                onOpenGallery={() => handleOpenCaseGallery(caseItem, 0)}
+              />
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* =========================================================================
-          FULL CLINICAL CASE GALLERY MODAL (SLIDE COM FOTOS + TEXTO NA LATERAL)
-          ========================================================================= */}
+      {/* Modal Lightbox com Slide e Painel Lateral */}
       <AnimatePresence>
         {modalCase && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -638,7 +529,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
               className="fixed inset-0 bg-black/92 backdrop-blur-2xl"
             />
 
-            {/* Modal Box com Slide e Texto na Lateral */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -646,7 +536,7 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
               transition={{ duration: 0.35, ease: "easeOut" }}
               className="relative w-full max-w-6xl bg-[#0a0a0a] border border-[#D4AF37]/35 rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_25px_70px_rgba(0,0,0,0.95)] z-10 overflow-hidden flex flex-col max-h-[92vh]"
             >
-              {/* Modal Top Bar */}
+              {/* Barra Superior */}
               <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-white/[0.02]">
                 <div className="flex items-center gap-3">
                   <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
@@ -665,13 +555,10 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                 </button>
               </div>
 
-              {/* Main Body: Grid 12 colunas (Slide de Fotos à Esquerda + Texto Sobre o Caso na Lateral) */}
+              {/* Grid: Slide na Esquerda + Detalhes na Lateral */}
               <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto">
-                
-                {/* Coluna 1: Slide de Fotos (7 colunas no Desktop) */}
+                {/* Slide */}
                 <div className="lg:col-span-7 bg-black/60 flex flex-col justify-between p-4 sm:p-6 border-b lg:border-b-0 lg:border-r border-white/10">
-                  
-                  {/* Photo Display Screen */}
                   <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] bg-black rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center shadow-inner">
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -693,7 +580,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       </motion.div>
                     </AnimatePresence>
 
-                    {/* Badge Antes / Depois na Foto */}
                     <div className="absolute top-3 left-3 z-10">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-mont font-bold tracking-wider uppercase backdrop-blur-md shadow-md border ${
@@ -706,7 +592,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       </span>
                     </div>
 
-                    {/* Left Navigation Arrow */}
                     <button
                       type="button"
                       onClick={(e) => {
@@ -721,7 +606,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       <ChevronLeft className="w-5 h-5" />
                     </button>
 
-                    {/* Right Navigation Arrow */}
                     <button
                       type="button"
                       onClick={(e) => {
@@ -735,7 +619,7 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                     </button>
                   </div>
 
-                  {/* Thumbnails strip below the slide */}
+                  {/* Miniaturas */}
                   <div className="mt-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[11px] font-mont text-white/50">
@@ -771,9 +655,8 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                   </div>
                 </div>
 
-                {/* Coluna 2: Texto Sobre o Caso na Lateral (5 colunas no Desktop) */}
+                {/* Texto na Lateral */}
                 <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-gradient-to-b from-white/[0.02] to-transparent">
-                  
                   <div className="space-y-4">
                     <div>
                       <span className="text-[10px] font-mont uppercase tracking-[0.25em] text-primary/70 font-semibold block mb-1">
@@ -784,7 +667,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       </h4>
                     </div>
 
-                    {/* Descrição Ativa da Foto Selecionada */}
                     <div className="p-4 rounded-xl bg-white/[0.04] border border-[#D4AF37]/25 space-y-2">
                       <div className="flex items-center gap-2">
                         <span
@@ -805,7 +687,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       </p>
                     </div>
 
-                    {/* Texto Clínico e Planejamento */}
                     <div className="space-y-2 pt-2">
                       <h6 className="text-xs font-mont font-bold uppercase tracking-wider text-[#FFF099] flex items-center gap-1.5">
                         <Info className="w-3.5 h-3.5 text-primary" />
@@ -816,7 +697,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                       </p>
                     </div>
 
-                    {/* Pilares do Tratamento */}
                     <div className="pt-2 space-y-1.5">
                       {[
                         "Planejamento digital individualizado",
@@ -831,7 +711,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                     </div>
                   </div>
 
-                  {/* CTA no Rodapé da Lateral */}
                   <div className="pt-4 border-t border-white/10 flex flex-col gap-2">
                     <button
                       type="button"
