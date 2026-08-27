@@ -174,8 +174,8 @@ const clinicalCases: CaseStudy[] = [
     clinicalDetails:
       "Planejamento com tecnologia 3D e confecção de facetas cerâmicas personalizadas para harmonizar o corredor bucal e a linha labial com mínima intervenção e máxima retenção biológica.",
     patientProfile: "Busca por alinhamento estético e restauração de dentes desgastados.",
-    beforeImage: "/3.jpg",
-    afterImage: "/4.jpg",
+    beforeImage: "/caso31.jpeg",
+    afterImage: "/caso32.jpeg",
     photos: [
       {
         src: "/caso31.jpeg",
