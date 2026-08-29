@@ -153,21 +153,6 @@ export default function FirstConsultation({ onOpenModal }: FirstConsultationProp
             );
           })}
         </div>
-
-        {/* Central Statement After 4 Steps */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-center mt-16 md:mt-20 space-y-4"
-        >
-          <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto"></div>
-          
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-fair italic text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-            “Diagnosticar. Planejar. Só então, tratar.”
-          </h3>
-        </motion.div>
       </div>
     </section>
   );

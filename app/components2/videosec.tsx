@@ -1,5 +1,7 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 import GoldCtaButton from "./goldbutton";
 
 interface VideosecProps {
@@ -7,6 +9,8 @@ interface VideosecProps {
 }
 
 export default function Videosec({ onOpenModal }: VideosecProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <section id="video" className="py-32 bg-transparent relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -36,18 +40,42 @@ export default function Videosec({ onOpenModal }: VideosecProps) {
           
           <div className="p-2 rounded-[2rem] bg-gradient-to-b from-white/5 to-transparent backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
             <div className="aspect-video rounded-[1.5rem] overflow-hidden relative bg-[#050505]">
-              {/* Technological Overlay on hover */}
-              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-10 transition-opacity duration-1000 pointer-events-none mix-blend-screen z-10"></div>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)] pointer-events-none z-10"></div>
-              
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/Mh6_5jt_RHU" 
-                title="YouTube video player"  
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                className="w-full h-full relative z-0 filter contrast-[1.1] opacity-90 group-hover:opacity-100 transition-opacity duration-1000"  
-              ></iframe>
+              {isPlaying ? (
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/Mh6_5jt_RHU?autoplay=1&rel=0&modestbranding=1" 
+                  title="YouTube video player"  
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowFullScreen
+                  className="w-full h-full relative z-0"  
+                ></iframe>
+              ) : (
+                <div 
+                  onClick={() => setIsPlaying(true)}
+                  className="w-full h-full relative cursor-pointer group/cover"
+                >
+                  <img 
+                    src="https://img.youtube.com/vi/Mh6_5jt_RHU/maxresdefault.jpg" 
+                    alt="Vídeo Dr. Marcelo Daltro" 
+                    className="w-full h-full object-cover group-hover/cover:scale-105 transition-transform duration-700" 
+                    loading="lazy"
+                  />
+                  
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute -inset-3 rounded-full bg-[#D4AF37]/30 blur-md animate-pulse"></div>
+                      <button
+                        type="button"
+                        aria-label="Assistir vídeo"
+                        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/80 text-[#FFF099] flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.4)] group-hover/cover:shadow-[0_0_50px_rgba(212,175,55,0.8)] group-hover/cover:scale-110 group-hover/cover:bg-[#D4AF37] group-hover/cover:text-black transition-all duration-500 cursor-pointer"
+                      >
+                        <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1.5" fill="currentColor" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

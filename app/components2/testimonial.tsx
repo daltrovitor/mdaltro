@@ -19,9 +19,9 @@ const strategicTestimonials: StrategicTestimonial[] = [
     id: "1",
     role: "Confiança",
     roleDescription: "Alguém que tinha receio ou insegurança antes de iniciar o tratamento.",
-    name: "Priscilla Ramos",
+    name: "Sávia Barros Diniz",
     treatment: "Lentes de Contato Dentais",
-    youtubeUrl: "https://youtu.be/FMtOkxWcNMk?si=mFYuTX-7OqasY2H8",
+    youtubeUrl: "https://youtu.be/bfd4QyYptZI?si=oOL0bB07GNMFTGJT",
     quote: "A segurança e o acolhimento me fizeram perder todo o receio desde a primeira conversa.",
   },
   {
@@ -37,15 +37,15 @@ const strategicTestimonials: StrategicTestimonial[] = [
     id: "3",
     role: "Transformação",
     roleDescription: "Alguém que fala do resultado e do impacto na autoestima e qualidade de vida.",
-    name: "Nelcina Martins",
+    name: "Sérgio Calura",
     treatment: "Reabilitação Oral Completa",
-    youtubeUrl: "https://youtu.be/p8SCJUWKMow?si=FdrinNSYyUTksdb_",
+    youtubeUrl: "https://youtu.be/Rj1tOSIvB78?si=y5-ijJUvBgzwQ9El",
     quote: "Recuperei a alegria de sorrir e a confiança no meu dia a dia. Uma transformação real.",
   },
 ];
 
 const getYouTubeVideoId = (url: string): string | null => {
-  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/;
+  const regex = /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([^&\n?#]+)/;
   const match = url.match(regex);
   return match ? match[1] : null;
 };

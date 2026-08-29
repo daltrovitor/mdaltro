@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 import GoldCtaButton from "./goldbutton";
 
 interface PhilosophyProps {
@@ -8,6 +10,8 @@ interface PhilosophyProps {
 }
 
 export default function Philosophy({ onOpenModal }: PhilosophyProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <section id="filosofia" className="py-28 md:py-36 bg-transparent relative z-10 overflow-hidden">
       {/* Background ambient lighting */}
@@ -52,14 +56,44 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
 
           <div className="p-2 sm:p-3 rounded-[2.2rem] bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
             <div className="aspect-video rounded-[1.7rem] overflow-hidden relative bg-[#050505]">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/Mh6_5jt_RHU"
-                title="Filosofia Dr. Marcelo Daltro"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                className="w-full h-full relative z-0 filter contrast-[1.05] opacity-95 group-hover:opacity-100 transition-opacity duration-700"
-              ></iframe>
+              {isPlaying ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Mh6_5jt_RHU?autoplay=1&rel=0&modestbranding=1"
+                  title="Filosofia Dr. Marcelo Daltro"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full relative z-0"
+                ></iframe>
+              ) : (
+                <div
+                  onClick={() => setIsPlaying(true)}
+                  className="w-full h-full relative cursor-pointer group/cover"
+                >
+                  <img
+                    src="https://img.youtube.com/vi/Mh6_5jt_RHU/maxresdefault.jpg"
+                    alt="Filosofia Dr. Marcelo Daltro"
+                    className="w-full h-full object-cover group-hover/cover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+
+                  {/* Custom Luxury Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      {/* Glow Pulse */}
+                      <div className="absolute -inset-3 rounded-full bg-[#D4AF37]/30 blur-md animate-pulse"></div>
+                      <button
+                        type="button"
+                        aria-label="Assistir ao vídeo Nossa Filosofia"
+                        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/80 text-[#FFF099] flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.4)] group-hover/cover:shadow-[0_0_50px_rgba(212,175,55,0.8)] group-hover/cover:scale-110 group-hover/cover:bg-[#D4AF37] group-hover/cover:text-black transition-all duration-500 cursor-pointer"
+                      >
+                        <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1.5" fill="currentColor" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

@@ -227,6 +227,69 @@ const clinicalCases: CaseStudy[] = [
       },
     ],
   },
+  {
+    id: "caso-4",
+    title: "Facetas de Porcelana",
+    tag: "Facetas de Porcelana",
+    summary:
+      "Correção precisa de cor, fechamento de espaços e reanatomização dental com facetas cerâmicas de alta translucidez e durabilidade.",
+    clinicalDetails:
+      "Planejamento com tecnologia 3D e confecção de facetas cerâmicas personalizadas para harmonizar o corredor bucal e a linha labial com mínima intervenção e máxima retenção biológica.",
+    patientProfile: "Busca por alinhamento estético e restauração de dentes desgastados.",
+    beforeImage: "/caso41.jpeg",
+    afterImage: "/caso42.jpeg",
+    photos: [
+      {
+        src: "/caso41.jpeg",
+        title: "Situação Inicial",
+        stage: "Antes",
+        isBefore: true,
+        description:
+          "Registro fotográfico inicial identificando assimetrias e perda de volume dental anterior.",
+      },
+      {
+        src: "/caso42.jpeg",
+        title: "Resultado com Facetas",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Resultado final pós-cimentação das facetas cerâmicas com anatomia e brilho natural restabelecidos.",
+      },
+      {
+        src: "/caso43.jpeg",
+        title: "Escultura Cerâmica",
+        stage: "Laboratorial",
+        isBefore: false,
+        description:
+          "Facetas confeccionadas em cerâmica pura com fidelidade micrométrica às proporções planejadas.",
+      },
+      {
+        src: "/caso44.jpeg",
+        title: "Preparo Minimamente Invasivo",
+        stage: "Etapa Clínica",
+        isBefore: true,
+        description:
+          "Preparo conservador preservando ao máximo a estrutura do esmalte dentário.",
+      },
+      {
+        src: "/caso45.jpeg",
+        title: "Harmonia Facial e Sorriso Frontal",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Sorriso projetado para valorizar a expressão natural e as proporções do rosto.",
+      },
+      {
+        src: "/caso46.jpeg",
+        title: "Vista Lateral & Textura",
+        stage: "Depois",
+        isBefore: false,
+        description:
+          "Microtexturas e luminosidade perfeitamente integradas à dentição natural.",
+      },
+    ],
+  },
+ 
 ];
 
 // Componente individual para cada card grandão de Antes e Depois
