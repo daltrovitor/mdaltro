@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import { useState } from "react";
@@ -72,8 +73,10 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
                   className="w-full h-full relative cursor-pointer group/cover"
                 >
                   <img
-                    src="https://img.youtube.com/vi/Mh6_5jt_RHU/maxresdefault.jpg"
+                    src="/thumbnails/filosofia.webp"
                     alt="Filosofia Dr. Marcelo Daltro"
+                    width={1280}
+                    height={720}
                     className="w-full h-full object-cover group-hover/cover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />

@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import React, { useState } from "react";
@@ -149,6 +150,9 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
 
         {/* Modal Window */}
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-step-title"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -164,6 +168,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
                   onClick={() => setStep((prev) => prev - 1)}
                   className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
                   title="Voltar"
+                  aria-label="Voltar para a etapa anterior"
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
@@ -181,6 +186,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
               onClick={handleClose}
               className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
               title="Fechar"
+              aria-label="Fechar formulário de qualificação"
             >
               <X className="w-6 h-6" />
             </button>
@@ -368,6 +374,8 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
 
                 <div className="space-y-4 pt-2">
                   <textarea
+                    id="form-detalhes"
+                    aria-label="Conte brevemente o que você gostaria de mudar"
                     rows={4}
                     value={detalhes}
                     onChange={(e) => setDetalhes(e.target.value)}
@@ -415,10 +423,11 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
                   )}
 
                   <div>
-                    <label className="block text-xs font-mont uppercase tracking-widest text-[#FFF099]/80 mb-2">
+                    <label htmlFor="form-nome" className="block text-xs font-mont uppercase tracking-widest text-[#FFF099]/80 mb-2">
                       Nome completo
                     </label>
                     <input
+                      id="form-nome"
                       type="text"
                       required
                       value={nome}
@@ -429,10 +438,11 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mont uppercase tracking-widest text-[#FFF099]/80 mb-2">
+                    <label htmlFor="form-whatsapp" className="block text-xs font-mont uppercase tracking-widest text-[#FFF099]/80 mb-2">
                       WhatsApp com DDD
                     </label>
                     <input
+                      id="form-whatsapp"
                       type="tel"
                       required
                       value={whatsapp}

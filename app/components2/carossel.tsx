@@ -1,8 +1,8 @@
+// Hello World
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 interface ImageSliderProps {
@@ -23,6 +23,7 @@ export function ImageSlider({
   className,
 }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const touchStartX = useRef<number | null>(null)
 
   // Auto-play functionality
   useEffect(() => {
@@ -56,46 +57,55 @@ export function ImageSlider({
   }
 
   return (
-    <section className="flex itens-center justify-center">
-      <div className={cn("relative md:w-2/3 w-full group", className)}>
-        {/* Main image container */}
-        <div className="relative w-full  overflow-hidden rounded-lg ">
-          <div
-            className="flex transition-transform duration-500 ease-in-out h-full"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {images.map((image, index) => (
-              <div key={index} className="w-full h-full flex-shrink-0 relative">
-                <img
-                  src={image || "/placeholder.svg"}
-                  alt={`Slide ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-              </div>
-            ))}
-          </div>
+    <div className={cn("relative w-full group", className)}>
+      {/* Main image container */}
+      <div className="relative w-full overflow-hidden rounded-xl aspect-[1890/673] bg-[#0a0a0a]">
+        <div
+          className="flex transition-transform duration-500 ease-in-out h-full"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return
+            const diff = touchStartX.current - e.changedTouches[0].clientX
+            if (diff > 45) goToNext()
+            else if (diff < -45) goToPrevious()
+            touchStartX.current = null
+          }}
+        >
+          {images.map((image, index) => (
+            <div key={index} className="w-full h-full flex-shrink-0 relative">
+              <img
+                src={image || "/placeholder.svg"}
+                alt={`Avaliação de paciente ${index + 1}`}
+                width={1890}
+                height={673}
+                className="w-full h-full object-contain sm:object-cover rounded-xl"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
           {/* Navigation arrows */}
           {showArrows && images.length > 1 && (
             <>
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute left-4 top-1/2 hover:bg-primary hover:text-black bg-black text-primary cursor-pointer -translate-y-1/2 border-0 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
+              <button
+                type="button"
+                className="inline-flex items-center justify-center size-8 sm:size-9 absolute left-2 sm:left-4 top-1/2 hover:bg-primary hover:text-black bg-black/80 text-primary cursor-pointer -translate-y-1/2 border border-white/10 backdrop-blur-sm opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full shadow-lg"
                 onClick={goToPrevious}
                 aria-label="Imagem anterior"
               >
                 <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black cursor-pointer backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary text-primary hover:text-black border-0 rounded-full"
+              </button>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center size-8 sm:size-9 absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/80 cursor-pointer backdrop-blur-sm opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary text-primary hover:text-black border border-white/10 rounded-full shadow-lg"
                 onClick={goToNext}
                 aria-label="Próxima imagem"
               >
                 <ChevronRight className="h-4 w-4" />
-              </Button>
+              </button>
             </>
           )}
           {/* Loading indicator for current image */}
@@ -103,17 +113,22 @@ export function ImageSlider({
         </div>
         {/* Dots indicator */}
         {showDots && images.length > 1 && (
-          <div className="flex justify-center mt-4 gap-2">
+          <div className="flex justify-center mt-4 gap-1">
             {images.map((_, index) => (
               <button
                 key={index}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  index === currentIndex ? "bg-primary w-8" : "bg-muted-foreground/30 hover:bg-muted-foreground/50",
-                )}
+                type="button"
+                className="p-3 inline-flex items-center justify-center cursor-pointer bg-transparent border-0 min-h-[44px] min-w-[44px]"
                 onClick={() => goToSlide(index)}
-                aria-label={`Ir para slide ${index + 1}`}
-              />
+                aria-label={`Ir para avaliação ${index + 1}`}
+              >
+                <span
+                  className={cn(
+                    "h-2 rounded-full transition-all duration-300 block",
+                    index === currentIndex ? "bg-primary w-8" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50",
+                  )}
+                />
+              </button>
             ))}
           </div>
         )}
@@ -124,6 +139,5 @@ export function ImageSlider({
           </div>
         )}
       </div>
-    </section>
   )
 }

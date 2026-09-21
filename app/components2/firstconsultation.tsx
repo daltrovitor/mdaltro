@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import { motion } from "framer-motion";
@@ -16,7 +17,7 @@ const steps = [
     description:
       "Entender o que incomoda, suas expectativas, experiências anteriores e o que você deseja alcançar é o primeiro passo para qualquer decisão.",
     icon: MessageSquareHeart,
-    image: "/sec41.jpeg",
+    image: "/sec41.webp",
     tag: "Escuta & Acolhimento",
     caption: "Conversa dedicada fora da cadeira clínica para entender sua história e objetivos.",
   },
@@ -26,7 +27,7 @@ const steps = [
     description:
       "O exame clínico detalhado nos permite compreender não apenas a estética, mas também a saúde, a função e as particularidades do seu sorriso.",
     icon: Search,
-    image: "/sec42.jpeg",
+    image: "/sec42.webp",
     tag: "Exame Clínico Detalhado",
     caption: "Avaliação minuciosa da saúde bucal, integridade periodontal e função mastigatória.",
   },
@@ -36,7 +37,7 @@ const steps = [
     description:
       "Fotografias, escaneamento 3D e recursos de imagem ampliam nossa capacidade de observar detalhes, documentar o caso e compreender melhor o ponto de partida.",
     icon: Scan,
-    image: "/sec43.jpeg",
+    image: "/sec43.webp",
     tag: "Tecnologia & Escaneamento 3D",
     caption: "Mapeamento digital tridimensional para máxima precisão e segurança no diagnóstico.",
   },
@@ -46,7 +47,7 @@ const steps = [
     description:
       "Reunimos as informações do diagnóstico para estudar as possibilidades e definir um caminho coerente com suas necessidades, expectativas e prioridades.",
     icon: Layers,
-    image: "/sec44.jpeg",
+    image: "/sec44.webp",
     tag: "Planejamento Individualizado",
     caption: "Estudo integrado para apresentar soluções claras, seguras e personalizadas para você.",
   },
@@ -117,7 +118,7 @@ export default function FirstConsultation({ onOpenModal }: FirstConsultationProp
                         alt={item.title}
                         fill
                         className="object-cover object-center filter contrast-[1.05] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        sizes="(max-width: 640px) 380px, 400px"
                       />
                       <div className="absolute bottom-4 left-4 right-4 z-20">
                         <span className="inline-block px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-primary/30 text-xs font-mont text-primary/90 font-medium tracking-wide">
@@ -153,6 +154,21 @@ export default function FirstConsultation({ onOpenModal }: FirstConsultationProp
             );
           })}
         </div>
+
+        {/* Central Statement After 4 Steps */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="text-center mt-16 md:mt-20 space-y-4"
+        >
+          <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto"></div>
+          
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-fair italic text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF099] to-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+            “Diagnosticar. Planejar. Só então, tratar.”
+          </h3>
+        </motion.div>
       </div>
     </section>
   );

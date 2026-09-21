@@ -1,3 +1,4 @@
+// Hello World
 "use client"
 
 import { motion } from "framer-motion"
@@ -58,12 +59,12 @@ export default function TextTestimonials() {
            whileInView={{ opacity: 1, scale: 1 }}
            viewport={{ once: true, margin: "-100px" }}
            transition={{ duration: 1.2, ease: "easeOut" }}
-           className="relative"
+           className="relative max-w-4xl mx-auto"
         >
           {/* Subtle glow behind slider */}
-          <div className="absolute inset-0 bg-primary/5 blur-[100px] rounded-full z-0 pointer-events-none w-3/4 mx-auto"></div>
+          <div className="absolute inset-0 bg-primary/5 blur-[80px] rounded-full z-0 pointer-events-none w-3/4 mx-auto"></div>
           
-          <div className="relative z-10 ring-1 ring-white/5 bg-[#050505] p-2 md:p-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          <div className="relative z-10 ring-1 ring-white/10 bg-[#080808] p-1.5 sm:p-2.5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)]">
             <ImageSlider
                 images={sampleImages}
                 autoPlay={true}

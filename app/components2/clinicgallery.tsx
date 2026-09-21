@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -305,7 +306,6 @@ export default function ClinicGallery({ onOpenModal }: ClinicGalleryProps) {
                       fill
                       className="object-contain"
                       sizes="(max-width: 1200px) 100vw, 1200px"
-                      priority
                     />
                   </motion.div>
                 </AnimatePresence>

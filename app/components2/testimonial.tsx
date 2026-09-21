@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import { useState } from "react";
@@ -50,7 +51,14 @@ const getYouTubeVideoId = (url: string): string | null => {
   return match ? match[1] : null;
 };
 
-const getYouTubeThumbnail = (url: string): string => {
+const thumbnailMap: Record<string, string> = {
+  "1": "/thumbnails/depoimento-1.webp",
+  "2": "/thumbnails/depoimento-2.webp",
+  "3": "/thumbnails/depoimento-3.webp",
+};
+
+const getYouTubeThumbnail = (url: string, id?: string): string => {
+  if (id && thumbnailMap[id]) return thumbnailMap[id];
   const videoId = getYouTubeVideoId(url);
   return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : "/placeholder.svg";
 };
@@ -139,8 +147,10 @@ export default function VideoTestimonialGallery() {
                     ) : (
                       <>
                         <img
-                          src={getYouTubeThumbnail(item.youtubeUrl)}
+                          src={getYouTubeThumbnail(item.youtubeUrl, item.id)}
                           alt={`Depoimento de ${item.name}`}
+                          width={405}
+                          height={720}
                           className="w-full h-full object-cover filter contrast-[1.05] grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
                           loading="lazy"
                         />

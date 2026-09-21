@@ -1,3 +1,4 @@
+// Hello World
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
@@ -386,7 +387,7 @@ function CaseItemComparator({
             src={caseItem.afterImage}
             alt="Depois - Resultado Final"
             fill
-            priority
+            loading="lazy"
             className="object-cover object-center pointer-events-none filter contrast-[1.05]"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
@@ -406,7 +407,7 @@ function CaseItemComparator({
             src={caseItem.beforeImage}
             alt="Antes - Situação Inicial"
             fill
-            priority
+            loading="lazy"
             className="object-cover object-center pointer-events-none filter contrast-[1.05]"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
@@ -428,13 +429,15 @@ function CaseItemComparator({
         </div>
 
         {/* Botão de Expansão no Rodapé da Foto */}
-        <div
+        <button
+          type="button"
           onClick={onOpenGallery}
+          aria-label={`Ver mais fotos do caso ${caseItem.title}`}
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-primary/40 text-[#FFF099] text-[11px] sm:text-xs font-mont font-medium tracking-wide pointer-events-auto hover:bg-[#D4AF37] hover:text-black transition-all cursor-pointer flex items-center gap-2 shadow-xl"
         >
           <Maximize2 className="w-3.5 h-3.5" />
           <span>Ver Mais • Ampliar fotos com slide</span>
-        </div>
+        </button>
       </div>
 
       {/* Resumo e Botões de Controle Rápido */}
@@ -447,6 +450,7 @@ function CaseItemComparator({
           <button
             type="button"
             onClick={() => setSliderPosition(0)}
+            aria-label="Ver 100% da foto depois"
             className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
               sliderPosition === 0
                 ? "bg-primary text-black font-bold"
@@ -458,6 +462,7 @@ function CaseItemComparator({
           <button
             type="button"
             onClick={() => setSliderPosition(50)}
+            aria-label="Ver 50% antes e 50% depois"
             className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
               sliderPosition === 50
                 ? "bg-primary text-black font-bold"
@@ -469,6 +474,7 @@ function CaseItemComparator({
           <button
             type="button"
             onClick={() => setSliderPosition(100)}
+            aria-label="Ver 100% da foto antes"
             className={`px-3 py-1 rounded-full text-[11px] font-mont tracking-wider transition-colors cursor-pointer ${
               sliderPosition === 100
                 ? "bg-primary text-black font-bold"
@@ -638,7 +644,6 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
                           fill
                           className="object-contain"
                           sizes="(max-width: 1024px) 100vw, 60vw"
-                          priority
                         />
                       </motion.div>
                     </AnimatePresence>
