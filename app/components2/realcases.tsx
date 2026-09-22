@@ -168,18 +168,18 @@ const clinicalCases: CaseStudy[] = [
   },
   {
     id: "caso-3",
-    title: "Facetas de Porcelana",
-    tag: "Facetas de Porcelana",
+    title: "Lentes de Contato Cerâmicas",
+    tag: "Lentes de Contato Cerâmicas",
     summary:
-      "Correção precisa de cor, fechamento de espaços e reanatomização dental com facetas cerâmicas de alta translucidez e durabilidade.",
+      "Reconstrução estética personalizada com lentes cerâmicas ultrafinas, devolvendo naturalidade, proporções harmônicas e luminosidade ao sorriso.",
     clinicalDetails:
-      "Planejamento com tecnologia 3D e confecção de facetas cerâmicas personalizadas para harmonizar o corredor bucal e a linha labial com mínima intervenção e máxima retenção biológica.",
-    patientProfile: "Busca por alinhamento estético e restauração de dentes desgastados.",
-    beforeImage: "/caso31.jpeg",
-    afterImage: "/caso32.jpeg",
+      "Tratamento realizado com planejamento digital detalhado e confecção de lentes cerâmicas com espessura mínima, preservando a integridade dental e proporcionando um resultado harmônico e natural.",
+    patientProfile: "Queixa de desgaste dental, pequenas assimetrias e coloração amarelada.",
+    beforeImage: "/caso31.webp",
+    afterImage: "/caso32.webp",
     photos: [
       {
-        src: "/caso31.jpeg",
+        src: "/caso31.webp",
         title: "Situação Inicial",
         stage: "Antes",
         isBefore: true,
@@ -187,7 +187,7 @@ const clinicalCases: CaseStudy[] = [
           "Registro fotográfico inicial identificando assimetrias e perda de volume dental anterior.",
       },
       {
-        src: "/caso32.jpeg",
+        src: "/caso32.webp",
         title: "Resultado com Facetas",
         stage: "Depois",
         isBefore: false,
@@ -195,7 +195,7 @@ const clinicalCases: CaseStudy[] = [
           "Resultado final pós-cimentação das facetas cerâmicas com anatomia e brilho natural restabelecidos.",
       },
       {
-        src: "/caso33.jpeg",
+        src: "/caso33.webp",
         title: "Escultura Cerâmica",
         stage: "Laboratorial",
         isBefore: false,
@@ -203,7 +203,7 @@ const clinicalCases: CaseStudy[] = [
           "Facetas confeccionadas em cerâmica pura com fidelidade micrométrica às proporções planejadas.",
       },
       {
-        src: "/caso34.jpeg",
+        src: "/caso34.webp",
         title: "Preparo Minimamente Invasivo",
         stage: "Etapa Clínica",
         isBefore: true,
@@ -211,7 +211,7 @@ const clinicalCases: CaseStudy[] = [
           "Preparo conservador preservando ao máximo a estrutura do esmalte dentário.",
       },
       {
-        src: "/caso35.jpeg",
+        src: "/caso35.webp",
         title: "Harmonia Facial e Sorriso Frontal",
         stage: "Depois",
         isBefore: false,
@@ -219,7 +219,7 @@ const clinicalCases: CaseStudy[] = [
           "Sorriso projetado para valorizar a expressão natural e as proporções do rosto.",
       },
       {
-        src: "/caso36.jpeg",
+        src: "/caso36.webp",
         title: "Vista Lateral & Textura",
         stage: "Depois",
         isBefore: false,
@@ -237,11 +237,11 @@ const clinicalCases: CaseStudy[] = [
     clinicalDetails:
       "Planejamento com tecnologia 3D e confecção de facetas cerâmicas personalizadas para harmonizar o corredor bucal e a linha labial com mínima intervenção e máxima retenção biológica.",
     patientProfile: "Busca por alinhamento estético e restauração de dentes desgastados.",
-    beforeImage: "/caso41.jpeg",
-    afterImage: "/caso42.jpeg",
+    beforeImage: "/caso41.webp",
+    afterImage: "/caso42.webp",
     photos: [
       {
-        src: "/caso41.jpeg",
+        src: "/caso41.webp",
         title: "Situação Inicial",
         stage: "Antes",
         isBefore: true,
@@ -249,7 +249,7 @@ const clinicalCases: CaseStudy[] = [
           "Registro fotográfico inicial identificando assimetrias e perda de volume dental anterior.",
       },
       {
-        src: "/caso42.jpeg",
+        src: "/caso42.webp",
         title: "Resultado com Facetas",
         stage: "Depois",
         isBefore: false,
@@ -257,7 +257,7 @@ const clinicalCases: CaseStudy[] = [
           "Resultado final pós-cimentação das facetas cerâmicas com anatomia e brilho natural restabelecidos.",
       },
       {
-        src: "/caso43.jpeg",
+        src: "/caso43.webp",
         title: "Escultura Cerâmica",
         stage: "Laboratorial",
         isBefore: false,
@@ -265,7 +265,7 @@ const clinicalCases: CaseStudy[] = [
           "Facetas confeccionadas em cerâmica pura com fidelidade micrométrica às proporções planejadas.",
       },
       {
-        src: "/caso44.jpeg",
+        src: "/caso44.webp",
         title: "Preparo Minimamente Invasivo",
         stage: "Etapa Clínica",
         isBefore: true,
@@ -273,7 +273,7 @@ const clinicalCases: CaseStudy[] = [
           "Preparo conservador preservando ao máximo a estrutura do esmalte dentário.",
       },
       {
-        src: "/caso45.jpeg",
+        src: "/caso45.webp",
         title: "Harmonia Facial e Sorriso Frontal",
         stage: "Depois",
         isBefore: false,
@@ -281,7 +281,7 @@ const clinicalCases: CaseStudy[] = [
           "Sorriso projetado para valorizar a expressão natural e as proporções do rosto.",
       },
       {
-        src: "/caso46.jpeg",
+        src: "/caso46.webp",
         title: "Vista Lateral & Textura",
         stage: "Depois",
         isBefore: false,
@@ -290,16 +290,17 @@ const clinicalCases: CaseStudy[] = [
       },
     ],
   },
- 
 ];
 
 // Componente individual para cada card grandão de Antes e Depois
 function CaseItemComparator({
   caseItem,
   onOpenGallery,
+  priority = false,
 }: {
   caseItem: CaseStudy;
   onOpenGallery: () => void;
+  priority?: boolean;
 }) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -387,7 +388,8 @@ function CaseItemComparator({
             src={caseItem.afterImage}
             alt="Depois - Resultado Final"
             fill
-            loading="lazy"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
             className="object-cover object-center pointer-events-none filter contrast-[1.05]"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
@@ -407,7 +409,8 @@ function CaseItemComparator({
             src={caseItem.beforeImage}
             alt="Antes - Situação Inicial"
             fill
-            loading="lazy"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
             className="object-cover object-center pointer-events-none filter contrast-[1.05]"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
@@ -580,6 +583,7 @@ export default function RealCases({ onOpenModal }: RealCasesProps) {
               <CaseItemComparator
                 caseItem={caseItem}
                 onOpenGallery={() => handleOpenCaseGallery(caseItem, 0)}
+                priority={index === 0}
               />
             </motion.div>
           ))}

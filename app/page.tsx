@@ -3,10 +3,13 @@
 import React from "react";
 import Hero from "@/app/components2/hero";
 import DeferredPageContent from "@/app/components2/deferred-page-content";
+import PageLoader from "@/app/components2/page-loader";
 
 export default function HomePage() {
   return (
     <main id="main-content" className="min-h-screen bg-[#050505] text-foreground font-mont selection:bg-primary/30 selection:text-primary relative overflow-x-hidden">
+      {/* Swift Luxury Initial Loader */}
+      <PageLoader />
 
       {/* =========================================================================
           SEÇÃO 1: HERO PERSONALIZADA (Pure Server Component)

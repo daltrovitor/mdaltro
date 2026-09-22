@@ -7,20 +7,20 @@ import { ImageSlider } from "./carossel"
 export default function TextTestimonials() {
 
   const sampleImages = [
-    "/public2/1.jpg",
-    "/public2/2.jpg",
-    "/public2/3.jpg",
-    "/public2/4.jpg",
-    "/public2/5.jpg",
-    "/public2/6.jpg",
-    "/public2/7.jpg",
-    "/public2/8.jpg",
-    "/public2/9.jpg",
-    "/public2/10.jpg",
-    "/public2/11.jpg",
-    "/public2/12.jpg",
-    "/public2/13.jpg",
-    "/public2/14.jpg",
+    "/public2/1.webp",
+    "/public2/2.webp",
+    "/public2/3.webp",
+    "/public2/4.webp",
+    "/public2/5.webp",
+    "/public2/6.webp",
+    "/public2/7.webp",
+    "/public2/8.webp",
+    "/public2/9.webp",
+    "/public2/10.webp",
+    "/public2/11.webp",
+    "/public2/12.webp",
+    "/public2/13.webp",
+    "/public2/14.webp",
   ]
   return (
     <section className="py-24 px-4 bg-transparent relative">

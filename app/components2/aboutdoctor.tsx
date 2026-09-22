@@ -32,7 +32,7 @@ export default function AboutDoctor({ onOpenModal }: AboutDoctorProps) {
               <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none"></div>
                 <Image
-                  src="/doutor.jpeg"
+                  src="/doutor.webp"
                   alt="Dr. Marcelo Daltro"
                   fill
                   className="object-cover object-top filter contrast-[1.05] grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"

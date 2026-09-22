@@ -38,7 +38,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Acolhimento",
     description:
       "Ambiente sofisticado com balcão em pedra ônix translúcida iluminada, poltronas em couro capitonê e conforto acústico desde a sua chegada.",
-    image: "/clinica1.jpeg",
+    image: "/clinica1.webp",
     icon: Coffee,
   },
   {
@@ -47,7 +47,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Arquitetura",
     description:
       "Circulação clean e tecnológica com transparência e integração visual entre consultórios e área clínica.",
-    image: "/clinica2.jpeg",
+    image: "/clinica2.webp",
     icon: Shield,
   },
   {
@@ -56,7 +56,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Atendimento",
     description:
       "Cadeira ergonômica de alto conforto, monitor suspenso para demonstração de planejamento e mesa para escuta individualizada.",
-    image: "/clinica3.jpeg",
+    image: "/clinica3.webp",
     icon: Sparkles,
   },
   {
@@ -65,7 +65,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Tecnologia 3D",
     description:
       "Consultório equipado com scanner intraoral tridimensional de última geração e telas de diagnóstico de alta definição.",
-    image: "/clinica4.jpeg",
+    image: "/clinica4.webp",
     icon: Cpu,
   },
   {
@@ -74,7 +74,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Conforto & Bem-Estar",
     description:
       "Espaço exclusivo com poltrona reclinável de couro e jardim vertical para repouso tranquilo e privativo pré e pós-procedimentos.",
-    image: "/clinica5.jpeg",
+    image: "/clinica5.webp",
     icon: Heart,
   },
   {
@@ -83,7 +83,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Excelência Clínica",
     description:
       "Sala equipada para reabilitações orais complexas, cirurgias guiadas e protocolos rigorosos de esterilização e segurança biológica.",
-    image: "/clinica6.jpeg",
+    image: "/clinica6.webp",
     icon: Shield,
   },
   {
@@ -92,7 +92,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Identidade",
     description:
       "Mármore ônix nobre iluminado, iluminação planejada e acabamentos refinados que refletem o padrão de cuidado da clínica.",
-    image: "/clinica7.jpeg",
+    image: "/clinica7.webp",
     icon: Sparkles,
   },
   {
@@ -101,7 +101,7 @@ const clinicSpaces: ClinicSpace[] = [
     category: "Conforto",
     description:
       "Integração harmônica entre sofisticação, luz suave e bem-estar para proporcionar uma experiência serena a você e seus acompanhantes.",
-    image: "/clinica8.jpeg",
+    image: "/clinica8.webp",
     icon: Coffee,
   },
 ];

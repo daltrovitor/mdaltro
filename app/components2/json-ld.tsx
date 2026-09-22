@@ -16,7 +16,7 @@ const schemaData = {
       "image": [
         "https://marcelodaltro.com.br/hero.jpg",
         "https://marcelodaltro.com.br/doutor.jpg",
-        "https://marcelodaltro.com.br/clinica1.jpeg"
+        "https://marcelodaltro.com.br/clinica1.webp"
       ],
       "priceRange": "$$",
       "telephone": "+55-62-99187-3755",

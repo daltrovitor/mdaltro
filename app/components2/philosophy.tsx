@@ -12,6 +12,7 @@ interface PhilosophyProps {
 
 export default function Philosophy({ onOpenModal }: PhilosophyProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isIframeReady, setIsIframeReady] = useState(false);
 
   return (
     <section id="filosofia" className="pt-4 pb-12 sm:pt-8 sm:pb-20 md:py-28 bg-transparent relative z-10 overflow-hidden">
@@ -45,20 +46,11 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
 
           <div className="p-2 sm:p-3 rounded-[2.2rem] bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
             <div className="aspect-video rounded-[1.7rem] overflow-hidden relative bg-[#050505]">
-              {isPlaying ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/Mh6_5jt_RHU?autoplay=1&rel=0&modestbranding=1"
-                  title="Filosofia Dr. Marcelo Daltro"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full relative z-0"
-                ></iframe>
-              ) : (
+              {/* Cover Image & Play Action */}
+              {(!isPlaying || !isIframeReady) && (
                 <div
                   onClick={() => setIsPlaying(true)}
-                  className="w-full h-full relative cursor-pointer group/cover"
+                  className="absolute inset-0 w-full h-full cursor-pointer group/cover z-10"
                 >
                   <img
                     src="/thumbnails/filosofia.webp"
@@ -66,24 +58,51 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
                     width={800}
                     height={450}
                     className="w-full h-full object-cover group-hover/cover:scale-105 transition-transform duration-700"
-                    loading="lazy"
+                    loading="eager"
                   />
 
-                  {/* Custom Luxury Play Button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      {/* Glow Pulse */}
-                      <div className="absolute -inset-3 rounded-full bg-[#D4AF37]/30 blur-md animate-pulse"></div>
-                      <button
-                        type="button"
-                        aria-label="Assistir ao vídeo Nossa Filosofia"
-                        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/80 text-[#FFF099] flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.4)] group-hover/cover:shadow-[0_0_50px_rgba(212,175,55,0.8)] group-hover/cover:scale-110 group-hover/cover:bg-[#D4AF37] group-hover/cover:text-black transition-all duration-500 cursor-pointer"
-                      >
-                        <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1.5" fill="currentColor" />
-                      </button>
+                  {/* Play Button (when not yet clicked) */}
+                  {!isPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="absolute -inset-3 rounded-full bg-[#D4AF37]/30 blur-md animate-pulse"></div>
+                        <button
+                          type="button"
+                          aria-label="Assistir ao vídeo Nossa Filosofia"
+                          className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/80 text-[#FFF099] flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.4)] group-hover/cover:shadow-[0_0_50px_rgba(212,175,55,0.8)] group-hover/cover:scale-110 group-hover/cover:bg-[#D4AF37] group-hover/cover:text-black transition-all duration-500 cursor-pointer"
+                        >
+                          <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1.5" fill="currentColor" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {/* Connecting / Loading indicator (while YouTube player initializes) */}
+                  {isPlaying && !isIframeReady && (
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
+                      <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin"></div>
+                      <span className="text-xs font-mont tracking-wider text-[#FFF099] uppercase font-semibold">
+                        Iniciando vídeo...
+                      </span>
+                    </div>
+                  )}
                 </div>
+              )}
+
+              {/* YouTube Iframe (Fades in smoothly when ready) */}
+              {isPlaying && (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Mh6_5jt_RHU?autoplay=1&rel=0&modestbranding=1"
+                  title="Filosofia Dr. Marcelo Daltro"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className={`w-full h-full relative z-0 transition-opacity duration-500 ${
+                    isIframeReady ? "opacity-100" : "opacity-0"
+                  }`}
+                  onLoad={() => setIsIframeReady(true)}
+                ></iframe>
               )}
             </div>
           </div>

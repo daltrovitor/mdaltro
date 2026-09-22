@@ -82,7 +82,7 @@ export function ImageSlider({
                 width={1890}
                 height={673}
                 className="w-full h-full object-contain sm:object-cover rounded-xl"
-                loading="lazy"
+                loading={index === 0 ? "eager" : "lazy"}
               />
             </div>
           ))}
