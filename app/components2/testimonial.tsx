@@ -72,18 +72,18 @@ export default function VideoTestimonialGallery() {
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
 
   return (
-    <section id="experiencias" className="py-28 md:py-36 px-4 bg-transparent relative overflow-hidden z-10">
+    <section id="experiencias" className="py-14 sm:py-20 md:py-28 px-4 bg-transparent relative overflow-hidden z-10">
       {/* Subtle background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/5 blur-[180px] rounded-full pointer-events-none z-0"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header da Seção 3 */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1 }}
-          className="text-center mb-16 md:mb-24"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 md:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
@@ -114,10 +114,10 @@ export default function VideoTestimonialGallery() {
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8, delay: index * 0.15 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
                 className="flex flex-col h-full group"
               >
                 {/* Card Container */}

@@ -56,18 +56,18 @@ const needs = [
 
 export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
   return (
-    <section id="como-podemos-ajudar" className="py-28 md:py-36 bg-transparent relative z-10 overflow-hidden">
+    <section id="como-podemos-ajudar" className="py-14 sm:py-20 md:py-28 bg-transparent relative z-10 overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/5 blur-[200px] rounded-full pointer-events-none z-0"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1 }}
-          className="text-center mb-20 md:mb-28"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 md:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
@@ -95,10 +95,10 @@ export default function HowWeHelp({ onOpenModal }: HowWeHelpProps) {
           {needs.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
               className="flex flex-col h-full group"
             >
               <div className="flex-1 flex flex-col justify-between p-6 sm:p-7 rounded-[2rem] bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border border-white/10 hover:border-primary/40 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-500 relative overflow-hidden">

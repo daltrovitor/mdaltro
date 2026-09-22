@@ -127,21 +127,28 @@ export default function RootLayout({
       >
         {children}
         <JsonLd />
-        {/* Google Tag (gtag.js) - Carregado exclusivamente em produção no domínio oficial */}
+        {/* Google Tag (gtag.js) - Carregado exclusivamente em produção de forma não bloqueante */}
         <script
           id="google-tag-analytics"
           dangerouslySetInnerHTML={{
             __html: `
             if (typeof window !== 'undefined' && (window.location.hostname === 'marcelodaltro.com.br' || window.location.hostname.endsWith('.marcelodaltro.com.br'))) {
-              const script = document.createElement('script');
-              script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17696626474';
-              script.async = true;
-              document.head.appendChild(script);
+              const loadGtag = () => {
+                const script = document.createElement('script');
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17696626474';
+                script.async = true;
+                document.head.appendChild(script);
 
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-17696626474');
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'AW-17696626474');
+              };
+              if ('requestIdleCallback' in window) {
+                requestIdleCallback(loadGtag, { timeout: 2500 });
+              } else {
+                setTimeout(loadGtag, 1500);
+              }
             }
           `,
           }}

@@ -14,19 +14,13 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section id="filosofia" className="py-28 md:py-36 bg-transparent relative z-10 overflow-hidden">
+    <section id="filosofia" className="pt-4 pb-12 sm:pt-8 sm:pb-20 md:py-28 bg-transparent relative z-10 overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/8 blur-[160px] rounded-full pointer-events-none z-0"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header / Filosofia Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1 }}
-          className="text-center mb-16 md:mb-20"
-        >
+        <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
             <span className="text-xs md:text-sm font-mont tracking-[0.35em] text-primary/90 uppercase font-semibold">
@@ -42,16 +36,10 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
           </h2>
           
           <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent mx-auto mt-6"></div>
-        </motion.div>
+        </div>
 
         {/* Video Player Box */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
-          className="justify-center text-center max-w-5xl mx-auto relative group"
-        >
+        <div className="justify-center text-center max-w-5xl mx-auto relative group">
           {/* Ambient border glow */}
           <div className="absolute -inset-1.5 bg-gradient-to-r from-primary/10 via-primary/30 to-primary/10 rounded-[2.5rem] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-1000 -z-10"></div>
 
@@ -75,8 +63,8 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
                   <img
                     src="/thumbnails/filosofia.webp"
                     alt="Filosofia Dr. Marcelo Daltro"
-                    width={1280}
-                    height={720}
+                    width={800}
+                    height={450}
                     className="w-full h-full object-cover group-hover/cover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
@@ -99,20 +87,14 @@ export default function Philosophy({ onOpenModal }: PhilosophyProps) {
               )}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Post-Video Statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.2 }}
-          className="text-center mt-10 md:mt-12"
-        >
+        <div className="text-center mt-8 md:mt-12">
           <p className="text-xl sm:text-2xl md:text-3xl font-fair italic text-[#FFF099]/90 tracking-wide">
             “Diagnosticar. Planejar. Só então, tratar.”
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

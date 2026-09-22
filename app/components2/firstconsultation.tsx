@@ -55,7 +55,7 @@ const steps = [
 
 export default function FirstConsultation({ onOpenModal }: FirstConsultationProps) {
   return (
-    <section id="primeira-consulta" className="py-28 md:py-36 bg-transparent relative z-10 overflow-hidden">
+    <section id="primeira-consulta" className="py-14 sm:py-20 md:py-28 bg-transparent relative z-10 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blur-[160px] rounded-full pointer-events-none z-0"></div>
       <div className="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-primary/5 blur-[160px] rounded-full pointer-events-none z-0"></div>
@@ -63,11 +63,11 @@ export default function FirstConsultation({ onOpenModal }: FirstConsultationProp
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1 }}
-          className="text-center mb-20 md:mb-28"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 md:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
@@ -99,10 +99,10 @@ export default function FirstConsultation({ onOpenModal }: FirstConsultationProp
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.85, delay: 0.1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.75, delay: 0.1 }}
                 className="w-full"
               >
                 <div className="p-6 sm:p-8 rounded-[2.5rem] bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent border border-white/10 hover:border-primary/40 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-700 group relative overflow-hidden">
